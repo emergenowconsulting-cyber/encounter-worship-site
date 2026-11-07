@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encounter Worship Ministries</title>
+<meta name="description" content="Encounter Worship Ministries: prophetic worship nights, Sound Encounter Bible study, the Encounter Worship Collective and EW merch.">
+<link rel="icon" type="image/png" href="assets/ew-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400..800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* Plan: a navy "night sanctuary" world lit by gold fire, with bright white rooms for reading.
+   Wide uppercase display type for proclamation, warm italic serif for scripture. */
+:root{
+  --navy:#0B1C45;
+  --navy-deep:#060F2A;
+  --navy-2:#142A5E;
+  --gold:#D4AF55;
+  --gold-hi:#F3D682;
+  --white:#FFFFFF;
+  --mist:#F2F4F9;
+  --line-dark:rgba(212,175,85,.22);
+  --line-light:#DCE1EC;
+  --muted-dark:#9AA6C6;
+  --muted-light:#56617F;
+  --ok:#2E9E6B; --warn:#C98A1B; --bad:#C0453B;
+  --gold-grad:linear-gradient(135deg,#A8802F 0%,#F3D682 45%,#D4AF55 70%,#A8802F 100%);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-script:"Cormorant Garamond",Georgia,serif;
+  --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--navy-deep);color:var(--white);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{font-family:var(--f-display);font-stretch:112%;text-transform:uppercase;letter-spacing:.01em;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.6rem,6.2vw,5.4rem);font-weight:850}
+h2{font-size:clamp(1.9rem,3.8vw,3.2rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:750}
+h4{font-size:1rem;font-weight:700}
+p{margin:0}
+.wrap{width:min(1200px,100% - 40px);margin-inline:auto}
+.eyebrow{font-family:var(--f-display);font-stretch:125%;font-size:.75rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.gold-text{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.script{font-family:var(--f-script);font-style:italic;font-weight:500;text-transform:none;letter-spacing:0;font-stretch:normal}
+.lead{font-size:1.15rem;color:var(--muted-dark);max-width:62ch}
+.muted{color:var(--muted-dark)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+section{padding:88px 0}
+.light{background:var(--white);color:var(--navy);color-scheme:light}
+.light .lead,.light .muted{color:var(--muted-light)}
+.light .eyebrow{color:#9A7526}
+.mist{background:var(--mist);color:var(--navy);color-scheme:light}
+.mist .lead,.mist .muted{color:var(--muted-light)}
+.mist .eyebrow{color:#9A7526}
+.navy{background:var(--navy)}
+
+/* Buttons */
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:999px;border:1.5px solid transparent;font-family:var(--f-display);font-stretch:118%;font-weight:750;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold-grad);color:var(--navy-deep);box-shadow:0 8px 28px -10px rgba(243,214,130,.7)}
+.btn-gold:hover{box-shadow:0 12px 34px -10px rgba(243,214,130,.9)}
+.btn-line{border-color:rgba(255,255,255,.55);color:var(--white);background:transparent}
+.btn-line:hover{border-color:var(--gold-hi);color:var(--gold-hi)}
+.light .btn-line,.mist .btn-line,.panel-light .btn-line{border-color:var(--navy);color:var(--navy)}
+.btn-navy{background:var(--navy);color:var(--white)}
+.btn-sm{padding:9px 16px;font-size:.72rem}
+.btn-ghost{background:transparent;border:0;color:var(--gold);cursor:pointer;font-weight:700;padding:6px 8px;border-radius:8px}
+.btn-ghost:hover{background:rgba(212,175,85,.12)}
+
+/* Header */
+header.site{position:sticky;top:0;z-index:50;background:rgba(6,15,42,.86);backdrop-filter:saturate(1.3) blur(14px);-webkit-backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line-dark)}
+.nav{display:flex;align-items:center;gap:22px;height:74px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.brand img{height:40px;width:auto}
+.brand span{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:.86rem;letter-spacing:.16em;line-height:1.1}
+.brand small{display:block;font-size:.6rem;letter-spacing:.42em;color:var(--gold);font-weight:600}
+.navlinks{display:flex;gap:4px;align-items:center;margin-left:auto}
+.navlinks a,.navlinks button.dd{white-space:nowrap;font-size:.86rem;font-weight:600;text-decoration:none;padding:8px 12px;border-radius:8px;color:#D9DFEE;background:none;border:0;cursor:pointer}
+.navlinks a:hover,.navlinks button.dd:hover,.navlinks a.on{color:var(--gold-hi)}
+.dropdown{position:relative}
+.dropdown .menu{position:absolute;top:calc(100% + 10px);left:-10px;min-width:280px;background:var(--navy);border:1px solid var(--line-dark);border-radius:var(--r);padding:8px;display:none;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.dropdown.open .menu{display:block}
+.dropdown .menu a{display:block;padding:10px 12px;border-radius:10px}
+.dropdown .menu a b{display:block;color:var(--white);font-size:.92rem}
+.dropdown .menu a span{font-size:.8rem;color:var(--muted-dark);font-weight:500}
+.dropdown .menu a:hover{background:var(--navy-2)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.burger{display:none;margin-left:auto;background:none;border:1px solid var(--line-dark);color:var(--white);border-radius:10px;width:44px;height:44px;cursor:pointer}
+.mobile-menu{display:none}
+@media (max-width:1080px){
+  .navlinks,.nav-cta .hide-m{display:none}
+  .burger{display:inline-flex;align-items:center;justify-content:center}
+  .nav-cta{margin-left:0}
+  .mobile-menu.open{display:block;border-top:1px solid var(--line-dark);padding:12px 0 22px}
+  .mobile-menu a{display:block;padding:11px 4px;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(255,255,255,.06)}
+  .mobile-menu .sub{padding-left:18px;color:var(--muted-dark)}
+}
+@media (max-width:520px){.brand span{font-size:.7rem;letter-spacing:.1em}.brand img{height:32px}.nav{gap:10px}.cart-btn{padding:8px 12px}}
+@media (max-width:380px){.brand span{display:none}}
+
+/* Ticker */
+.ticker{overflow:hidden;border-block:1px solid var(--line-dark);background:var(--navy);white-space:nowrap}
+.ticker-track{display:inline-flex;gap:48px;padding:16px 0;animation:tick 38s linear infinite}
+.ticker-track span{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:1rem;letter-spacing:.2em;text-transform:uppercase}
+.ticker-track i{color:var(--gold);font-style:normal}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:110px 0 96px;background:radial-gradient(ellipse 70% 60% at 70% 105%,rgba(212,175,85,.28),transparent 60%),radial-gradient(ellipse 50% 50% at 15% 0%,rgba(20,42,94,.9),transparent 70%),var(--navy-deep)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.hero-figure{position:relative;justify-self:center}
+.hero-figure::before{content:"";position:absolute;inset:8% 0 0;background:radial-gradient(circle at 50% 60%,rgba(243,214,130,.35),transparent 65%)}.hero-figure img{position:relative;width:min(340px,80vw);filter:drop-shadow(0 30px 60px rgba(212,175,85,.25))}
+.hero h1 .script{display:block;font-size:.62em;color:var(--gold-hi);margin-bottom:6px}
+.hero .lead{margin:22px 0 32px;color:#C9D1E6}
+.page-hero{padding:96px 0 72px;background:radial-gradient(ellipse 60% 70% at 85% 110%,rgba(212,175,85,.22),transparent 60%),linear-gradient(180deg,var(--navy-deep),var(--navy));border-bottom:1px solid var(--line-dark);position:relative;overflow:hidden}
+.page-hero .wrap{position:relative}
+.page-hero h1{font-size:clamp(2.3rem,5vw,4.3rem);margin:12px 0 18px}
+.page-hero .bg-mark{position:absolute;right:-40px;bottom:-60px;width:380px;opacity:.07;pointer-events:none}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-figure{order:-1}.hero-figure img{width:220px}}
+
+/* Cards */
+.card{background:var(--navy);border:1px solid var(--line-dark);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px}
+.light .card,.mist .card,.card.on-light{background:var(--white);border-color:var(--line-light);color:var(--navy);box-shadow:0 1px 0 rgba(11,28,69,.03),0 18px 40px -28px rgba(11,28,69,.35)}
+.stream{position:relative;overflow:hidden;text-decoration:none;min-height:340px;justify-content:flex-end;padding:30px;border-radius:18px;border:1px solid var(--line-dark);transition:transform .2s ease,border-color .2s}
+.stream:hover{transform:translateY(-4px);border-color:var(--gold)}
+.stream .num{position:absolute;top:22px;left:28px;font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:.78rem;letter-spacing:.22em;color:var(--gold)}
+.stream .glyph{position:absolute;top:18px;right:18px;width:84px;height:84px;opacity:.9}
+.stream h3{font-size:1.45rem}
+.stream p{color:#C9D1E6;font-size:.95rem}
+.stream .go{font-family:var(--f-display);font-stretch:118%;font-size:.75rem;font-weight:750;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi)}
+.s1{background:radial-gradient(circle at 80% 10%,rgba(243,214,130,.25),transparent 50%),linear-gradient(160deg,#16306B,#0A1838)}
+.s2{background:radial-gradient(circle at 50% 120%,rgba(243,214,130,.45),transparent 55%),linear-gradient(160deg,#0D1E4C,#050C22)}
+.s3{background:radial-gradient(circle at 10% 0%,rgba(255,255,255,.14),transparent 45%),linear-gradient(160deg,#1A3473,#0B1C45)}
+.s4{background:radial-gradient(circle at 90% 90%,rgba(212,175,85,.35),transparent 50%),linear-gradient(160deg,#102658,#081436)}
+
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-dark);color:var(--gold-hi);background:rgba(212,175,85,.08)}
+.light .pill,.mist .pill,.on-light .pill{color:#8A6720;border-color:#E6D3A4;background:#FBF5E6}
+.pill.ok{color:#1F7A50;background:#E6F5EE;border-color:#BFE5D2}
+.pill.warn{color:#8A5D0B;background:#FCF2DE;border-color:#F0D9A6}
+.pill.bad{color:#9A3028;background:#FBE9E7;border-color:#F0C4BF}
+.pill.live{color:#fff;background:#C0453B;border-color:#C0453B}
+
+/* Event list (tour-date style) */
+.elist{display:flex;flex-direction:column;border-top:1px solid var(--line-dark)}
+.erow{display:grid;grid-template-columns:110px 1fr auto;gap:24px;align-items:center;padding:22px 4px;border-bottom:1px solid var(--line-dark)}
+.light .elist,.light .erow,.mist .elist,.mist .erow{border-color:var(--line-light)}
+.edate{font-family:var(--f-display);font-stretch:118%;text-transform:uppercase;line-height:1}
+.edate b{display:block;font-size:2.3rem;font-weight:850}
+.edate span{font-size:.75rem;letter-spacing:.2em;font-weight:700;color:var(--gold)}
+.light .edate span,.mist .edate span{color:#9A7526}
+.einfo h3{font-size:1.15rem;margin-bottom:6px}
+.einfo .meta{font-size:.9rem}
+@media (max-width:640px){.erow{grid-template-columns:72px 1fr}.erow .ecta{grid-column:1/-1}.edate b{font-size:1.7rem}}
+
+/* Countdown */
+.countdown{display:flex;gap:14px;flex-wrap:wrap}
+.countdown div{min-width:84px;padding:14px 10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line-dark);text-align:center}
+.countdown b{display:block;font-family:var(--f-display);font-stretch:112%;font-size:2rem;font-weight:850;font-variant-numeric:tabular-nums;line-height:1}
+.countdown span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dark)}
+
+/* Band */
+.band{border-radius:24px;padding:56px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 100% 0%,rgba(243,214,130,.35),transparent 55%),linear-gradient(135deg,var(--navy-2),var(--navy-deep));border:1px solid var(--line-dark);display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+@media (max-width:860px){.band{grid-template-columns:1fr;padding:34px}}
+.scripture{text-align:center;max-width:900px;margin:0 auto}
+.scripture blockquote{margin:0;font-family:var(--f-script);font-style:italic;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.3}
+.scripture cite{display:block;margin-top:18px;font-style:normal}
+
+/* Forms */
+form .field{display:flex;flex-direction:column;gap:6px}
+label{font-size:.82rem;font-weight:700;letter-spacing:.02em}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select option{color:var(--navy)}
+.light input,.light select,.light textarea,.mist input,.mist select,.mist textarea,.panel-light input,.panel-light select,.panel-light textarea,.on-light input,.on-light select,.on-light textarea{border-color:var(--line-light);background:var(--white);color:var(--navy)}
+textarea{min-height:110px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.9rem}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:var(--gold);flex-shrink:0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:600px){.fgrid{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+.demo-note{font-size:.78rem;color:var(--muted-dark);display:flex;gap:8px;align-items:center}
+.light .demo-note,.mist .demo-note,.on-light .demo-note,.panel-light .demo-note{color:var(--muted-light)}
+.demo-note::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* Steps */
+.steps{counter-reset:s;display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.step{counter-increment:s;padding:24px;border-radius:var(--r);border:1px solid var(--line-light);background:var(--white)}
+.step::before{content:"0" counter(s);font-family:var(--f-display);font-stretch:125%;font-weight:850;font-size:1.8rem;display:block;color:#C9A044;margin-bottom:10px}
+.navy .step,.step.dark{background:var(--navy);border-color:var(--line-dark)}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+.stat{padding:22px;border-radius:var(--r);border:1px solid var(--line-dark);background:rgba(255,255,255,.03)}
+.stat b{display:block;font-family:var(--f-display);font-stretch:112%;font-size:2.4rem;font-weight:850;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--muted-dark)}
+.light .stat,.mist .stat,.panel-light .stat{border-color:var(--line-light);background:var(--white)}
+.light .stat span,.mist .stat span,.panel-light .stat span{color:var(--muted-light)}
+
+/* Portal shell */
+.portal{display:grid;grid-template-columns:250px 1fr;min-height:calc(100vh - 74px)}
+.side{background:var(--navy);border-right:1px solid var(--line-dark);padding:26px 16px;display:flex;flex-direction:column;gap:4px}
+.side .who{display:flex;gap:12px;align-items:center;padding:6px 10px 22px;border-bottom:1px solid var(--line-dark);margin-bottom:12px}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--gold-grad);color:var(--navy-deep);display:grid;place-items:center;font-weight:800;flex-shrink:0;font-size:.9rem}
+.side button{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:11px 12px;border-radius:10px;border:0;background:none;color:#D9DFEE;font-weight:600;cursor:pointer}
+.side button:hover{background:var(--navy-2)}
+.side button.on{background:rgba(212,175,85,.14);color:var(--gold-hi)}
+.side svg{width:18px;height:18px;flex-shrink:0}
+.panel-light{background:var(--mist);color:var(--navy);color-scheme:light;padding:34px;min-width:0}
+.panel-light .muted{color:var(--muted-light)}
+.panel-light h2{font-size:clamp(1.6rem,2.6vw,2.2rem)}
+@media (max-width:860px){.portal{grid-template-columns:1fr}.side{flex-direction:row;overflow-x:auto;padding:12px;gap:6px}.side .who,.side .side-foot{display:none}.side button{width:auto;white-space:nowrap}.panel-light{padding:22px 16px}}
+.box{background:var(--white);border:1px solid var(--line-light);border-radius:var(--r);padding:22px;min-width:0}
+.box h3{font-size:1rem;margin-bottom:14px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{text-align:left;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-light);padding:10px 12px;border-bottom:1px solid var(--line-light);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid var(--line-light);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* Calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal .dow{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-light);text-align:center;padding:4px 0;font-weight:700}
+.cal .day{min-height:96px;border:1px solid var(--line-light);background:var(--white);border-radius:10px;padding:6px;font-size:.75rem;display:flex;flex-direction:column;gap:3px;min-width:0}
+.cal .day.out{opacity:.35}
+.cal .day.today{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.cal .day .d{font-weight:800;font-size:.8rem}
+.cal .ev{padding:3px 6px;border-radius:6px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.7rem}
+.ev.t-night{background:var(--navy);color:var(--gold-hi)}
+.ev.t-fireside{background:#E9EEFA;color:var(--navy)}
+.ev.t-outreach{background:#E6F5EE;color:#1F6B47}
+.ev.t-rehearsal{background:#FBF2DC;color:#7A5814}
+.ev.t-team{background:#EEE8F8;color:#4B3A7A}
+.ev.t-audition{background:#FBE9E7;color:#8E2E26}
+@media (max-width:640px){.cal .day{min-height:64px}.cal .ev{font-size:0;height:6px;padding:0}}
+
+/* Messages */
+.chat{display:grid;grid-template-columns:200px 1fr;border:1px solid var(--line-light);border-radius:var(--r);overflow:hidden;background:var(--white);min-height:480px}
+.chans{border-right:1px solid var(--line-light);padding:12px;background:#FAFBFD}
+.chans button{display:block;width:100%;text-align:left;padding:9px 10px;border-radius:8px;border:0;background:none;font-weight:700;color:var(--navy);cursor:pointer}
+.chans button.on{background:var(--navy);color:var(--gold-hi)}
+.msgs{display:flex;flex-direction:column;min-width:0}
+.msg-list{flex:1;padding:18px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:440px}
+.msg{display:flex;gap:10px}
+.msg .avatar{width:34px;height:34px;font-size:.75rem}
+.msg b{font-size:.88rem}
+.msg time{font-size:.72rem;color:var(--muted-light);margin-left:6px}
+.msg p{font-size:.92rem}
+.composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line-light)}
+@media (max-width:700px){.chat{grid-template-columns:1fr}.chans{display:flex;gap:4px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line-light)}.chans button{width:auto;white-space:nowrap}}
+
+/* Shop */
+.product{background:var(--white);color:var(--navy);border-radius:18px;overflow:hidden;border:1px solid var(--line-light);display:flex;flex-direction:column}
+.product .art{aspect-ratio:1/1;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,#FFFFFF,#E9EDF6)}
+.product .art svg{width:72%;height:72%}
+.product .body{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product .price{font-family:var(--f-display);font-stretch:112%;font-weight:800;font-size:1.15rem}
+.sizes{display:flex;gap:6px;flex-wrap:wrap}
+.sizes button{min-width:40px;padding:6px 8px;border-radius:8px;border:1.5px solid var(--line-light);background:var(--white);font-weight:700;font-size:.78rem;cursor:pointer;color:var(--navy)}
+.sizes button.on{border-color:var(--navy);background:var(--navy);color:var(--gold-hi)}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--white);color:var(--navy);color-scheme:light;z-index:90;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-30px 0 60px rgba(0,0,0,.35)}
+.drawer{visibility:hidden}.drawer.open{transform:none;visibility:visible}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:22px;border-bottom:1px solid var(--line-light)}
+.drawer .items{flex:1;overflow-y:auto;padding:12px 22px}
+.drawer .line{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-light)}
+.drawer .line .thumb{width:56px;height:56px;border-radius:10px;background:#EEF1F7;display:grid;place-items:center}
+.drawer .line .thumb svg{width:44px;height:44px}
+.drawer footer{padding:22px;border-top:1px solid var(--line-light);display:flex;flex-direction:column;gap:10px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line-light);border-radius:8px}
+.qty button{width:28px;height:28px;border:0;background:none;cursor:pointer;font-weight:800;color:var(--navy)}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--gold);color:var(--navy-deep);font-size:.68rem;font-weight:800;border-radius:999px;min-width:19px;height:19px;display:grid;place-items:center;padding:0 5px}
+
+/* Gallery */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 16px;border-radius:999px;border:1.5px solid var(--line-dark);background:transparent;color:#D9DFEE;font-weight:700;font-size:.82rem;cursor:pointer}
+.chip.on{background:var(--gold-grad);color:var(--navy-deep);border-color:transparent}
+.light .chip,.mist .chip,.panel-light .chip{border-color:var(--line-light);color:var(--navy)}
+.masonry{columns:3 280px;column-gap:16px}
+.tile{break-inside:avoid;margin-bottom:16px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;border:0;padding:0;width:100%;display:block;background:none;text-align:left;color:var(--white)}
+.tile .ph{width:100%;display:block}
+.tile figcaption{position:absolute;inset:auto 0 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(6,15,42,.92));font-size:.86rem;font-weight:700}
+.tile figcaption span{display:block;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);font-weight:700}
+.tile img.ph{object-fit:cover}
+
+/* Modal + toast */
+.modal-bg{position:fixed;inset:0;background:rgba(3,8,24,.72);backdrop-filter:blur(4px);z-index:100;display:none;place-items:center;padding:20px}
+.modal-bg.open{display:grid}
+.modal{background:var(--white);color:var(--navy);color-scheme:light;border-radius:20px;width:min(560px,100%);max-height:calc(100% - 20px);overflow-y:auto;padding:32px;position:relative}
+.modal.wide{width:min(900px,100%);padding:0;background:var(--navy-deep);color:var(--white)}
+.modal .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-light);background:var(--white);cursor:pointer;font-size:1.1rem;color:var(--navy);z-index:2}
+.ticket{border:2px dashed #D4AF55;border-radius:16px;padding:22px;background:linear-gradient(135deg,#0B1C45,#060F2A);color:#fff;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.ticket .code{font-family:var(--f-display);font-stretch:125%;font-weight:850;font-size:1.6rem;letter-spacing:.12em;color:var(--gold-hi)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--navy);color:var(--white);border:1px solid var(--gold);padding:12px 20px;border-radius:999px;font-weight:700;font-size:.9rem;z-index:120;opacity:0;transition:all .3s ease;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+/* Course cards */
+.course .bar{height:6px;border-radius:99px;background:#E4E8F1;overflow:hidden}
+.course .bar i{display:block;height:100%;background:var(--gold-grad)}
+.lock{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--muted-light)}
+
+/* Footer */
+footer.site{background:var(--navy-deep);border-top:1px solid var(--line-dark);padding:70px 0 34px}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px}
+@media (max-width:860px){.fcols{grid-template-columns:1fr 1fr}}
+footer.site h4{font-size:.78rem;letter-spacing:.22em;color:var(--gold);margin-bottom:14px}
+footer.site a{display:block;text-decoration:none;color:#C9D1E6;padding:4px 0;font-size:.92rem}
+footer.site a:hover{color:var(--gold-hi)}
+.fbottom{margin-top:50px;padding-top:24px;border-top:1px solid var(--line-dark);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted-dark)}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media (max-width:860px){.split{grid-template-columns:1fr;gap:32px}}
+.list-check{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.list-check li{display:flex;gap:12px;align-items:flex-start}
+.list-check li::before{content:"";width:20px;height:20px;flex-shrink:0;margin-top:3px;border-radius:50%;background:var(--gold-grad);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm-1.5 14.2L4.3 10l1.4-1.4 2.8 2.8 5.8-5.8 1.4 1.4-7.2 7.2z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0a10 10 0 100 20 10 10 0 000-20zm-1.5 14.2L4.3 10l1.4-1.4 2.8 2.8 5.8-5.8 1.4 1.4-7.2 7.2z'/%3E%3C/svg%3E") center/contain no-repeat}
+.sound-wave{display:flex;gap:4px;align-items:center;height:46px}
+.sound-wave i{width:4px;border-radius:4px;background:var(--gold-grad);animation:wave 1.4s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.empty{padding:28px;text-align:center;color:var(--muted-light);border:1.5px dashed var(--line-light);border-radius:var(--r)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+[hidden]{display:none!important}
+.modal .btn-line{border-color:var(--navy);color:var(--navy)}
+.err{color:var(--bad);font-weight:700;font-size:.88rem;min-height:0;margin:0}
+.err:empty{display:none}
+.sizegrid{border:1px solid var(--line-light);border-radius:12px;padding:14px 16px;margin:0}
+.sizegrid legend{font-weight:800;font-size:.9rem;padding:0 6px}
+.sg{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+@media (max-width:600px){.sg{grid-template-columns:repeat(4,1fr)}}
+.qbox{display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:800;font-size:.8rem}
+.qbox input{text-align:center;padding:10px 4px;font-variant-numeric:tabular-nums}
+.totalbar{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-radius:12px;background:var(--navy);color:#fff}
+.totalbar b{font-family:var(--f-display);font-stretch:112%;font-size:1.5rem;color:var(--gold-hi)}
+.etbox{padding:16px 18px;border-radius:12px;background:#FBF5E6;border:1px solid #E6D3A4;color:var(--navy);font-size:.92rem}
+.btn[disabled]{opacity:.6;cursor:wait;transform:none}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#events" aria-label="Encounter Worship events">
+      <img src="assets/ew-mark.png" alt="">
+      <span>ENCOUNTER WORSHIP<small>MINISTRIES</small></span>
+    </a>
+    <nav class="navlinks" aria-label="Main">
+      <a href="#events" data-nav="events">Events</a>
+      <a href="#shop" data-nav="shop">Shop</a>
+      <a href="#collective" data-nav="collective">Collective</a>
+      <a href="#about" data-nav="about">About</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-gold btn-sm hide-m" href="#collective" id="navCol">Join the Collective</a>
+    </div>
+    <button class="burger" data-act="burger" aria-label="Open menu">☰</button>
+  </div>
+  <div class="wrap mobile-menu" id="mmenu">
+    <a href="#events">Events &amp; Registration</a><a href="#shop">Shop: T-shirt pre-orders</a><a href="#collective">Encounter Worship Collective</a><a href="#about">About</a>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fcols" style="grid-template-columns:1.4fr 1fr 1fr">
+      <div class="stack">
+        <img src="assets/ew-logo-white.png" alt="Encounter Worship" style="width:150px">
+        <p class="muted" style="max-width:36ch">Training up leaders to operate in power and release the Sound of Heaven into the earth.</p>
+        <div class="row">
+          <span class="pill">Facebook · Encounter Worship Ministries</span>
+          <span class="pill">Instagram · Encounter Worship Revival</span>
+        </div>
+      </div>
+      <div><h4>Visit</h4><a href="#events">Events &amp; Registration</a><a href="#shop">T-shirt pre-orders</a><a href="#collective">Join the Collective</a><a href="#about">About EW</a></div>
+      <div><h4>Collective</h4><a href="#collective">Member sign in</a><a href="#collective">Create an account</a></div>
+    </div>
+    <div class="fbottom"><span>© 2026 Encounter Worship Ministries</span><a href="#check-in" style="display:inline;padding:0;font-size:.8rem;color:var(--muted-dark)">Team check-in</a></div>
+  </div>
+</footer>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- utilities ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const initials = n => String(n||"").split(/\s+/).filter(Boolean).slice(0,2).map(w => w[0].toUpperCase()).join("");
+const fmtDate = (d, o={weekday:"short", month:"short", day:"numeric"}) => new Date(d).toLocaleDateString("en-CA", o);
+const fmtTime = d => new Date(d).toLocaleTimeString("en-CA", {hour:"numeric", minute:"2-digit"});
+const money = n => "$" + Number(n).toFixed(2);
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),3000); }
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { v==null ? localStorage.removeItem(k) : localStorage.setItem(k,v); } catch(e){} },
+  sget(k){ try { return sessionStorage.getItem(k); } catch(e){ return null; } },
+  sset(k,v){ try { v==null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k,v); } catch(e){} }
+};
+async function api(path, body, headers={}){
+  const opt = { method: body ? "POST" : "GET", headers: {...headers} };
+  if (body){ opt.headers["content-type"]="application/json"; opt.body=JSON.stringify(body); }
+  const tok = store.get("ew-token"); if (tok) opt.headers.authorization = "Bearer " + tok;
+  let res;
+  try { res = await fetch("/api" + path, opt); } catch(e){ throw new Error("We couldn't reach the server. Check your connection and try again."); }
+  let data = {}; try { data = await res.json(); } catch(e){}
+  if (!res.ok) { const er = new Error(data.error || "Something went wrong. Please try again."); er.status = res.status; throw er; }
+  return data;
+}
+const adminH = () => ({ "x-admin-pin": store.sget("ew-pin") || "" });
+async function withBusy(btn, fn){ const t=btn.innerHTML; btn.disabled=true; btn.innerHTML="Saving…"; try { return await fn(); } finally { btn.disabled=false; btn.innerHTML=t; } }
+
+/* ---------- events ---------- */
+const VENUE = { name:"Fruitful House", address:"6731 Columbus Road, Mississauga, ON L5T 2M4" };
+const MAPS = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Fruitful House, " + VENUE.address);
+const EVENTS = [
+  {id:"cry-for-our-nation-2026-11-07", type:"night", title:"Encounter Prophetic Worship Night", sub:"A Cry For Our Nation", date:"2026-11-07T18:30", venue:VENUE.name, place:VENUE.address, note:"In person · Free"},
+  ...["2026-11-11","2026-11-18","2026-11-25","2026-12-02"].map((d,i,a)=>({id:"se-"+d, type:"fireside", title:"Sound Encounter Fireside Chat", sub:i===a.length-1?"Last session of 2026":"Weekly Bible study", date:d+"T21:00", venue:"Zoom", place:"Online", note:i===a.length-1?"Last Sound Encounter of the year":"Every Wednesday · 9 pm ET"}))
+];
+const TYPE_LABEL = {night:"Worship Night", fireside:"Sound Encounter"};
+const upcoming = () => EVENTS.filter(e => Date.now() < new Date(e.date).getTime() + 4*36e5).sort((a,b)=>new Date(a.date)-new Date(b.date));
+const isToday = e => new Date(e.date).toDateString() === new Date().toDateString();
+
+function pageHero(eyebrow, title, lead, ctas=""){
+  return `<section class="page-hero"><img class="bg-mark" src="assets/ew-mark.png" alt=""><div class="wrap"><div class="eyebrow">${eyebrow}</div><h1>${title}</h1><p class="lead">${lead}</p>${ctas?`<div class="row" style="margin-top:30px">${ctas}</div>`:""}</div></section>`;
+}
+function eventRow(e, light){
+  const d = new Date(e.date);
+  return `<div class="erow">
+    <div class="edate"><span>${d.toLocaleDateString("en-CA",{month:"short"})}</span><b>${d.getDate()}</b><span>${d.toLocaleDateString("en-CA",{weekday:"short"})}</span></div>
+    <div class="einfo"><div class="row" style="margin-bottom:8px;gap:8px"><span class="pill">${TYPE_LABEL[e.type]}</span>${isToday(e)?'<span class="pill live">Tonight</span>':""}<span class="muted" style="font-size:.82rem">${esc(e.note)}</span></div>
+      <h3>${esc(e.title)}${e.sub?`: ${esc(e.sub)}`:""}</h3><div class="meta muted">${fmtTime(e.date)} ET · ${esc(e.venue)}${e.place!=="Online"?", "+esc(e.place):" (online)"}</div></div>
+    <div class="ecta"><button class="btn ${light?"btn-navy":"btn-gold"} btn-sm" data-act="register" data-id="${e.id}">Register</button></div>
+  </div>`;
+}
+function collectiveBand(){
+  return `<div class="band"><div class="stack"><div class="eyebrow">Encounter Worship Collective</div><h2>Be part of the <span class="gold-text">sound</span></h2><p class="lead" style="color:#C9D1E6">Get the latest on EW, stand with us in prayer, hear first when we go live, and receive member discounts on events when available.</p><div class="row"><a class="btn btn-gold" href="#collective">Join the Collective</a><a class="btn btn-line" href="#collective">Member sign in</a></div></div>
+  <ul class="list-check" style="color:#E3E8F4"><li>Ministry updates on events and projects</li><li>Support us in prayer</li><li>Messages when we're online</li><li>Member discounts on events (when applicable)</li></ul></div>`;
+}
+
+const P = {};
+P.events = () => {
+  const list = upcoming();
+  const feat = list.find(e=>e.type==="night");
+  return `
+  <section class="hero" style="padding:80px 0 72px"><canvas id="embers"></canvas><div class="wrap">
+    ${feat ? `<div>
+      <div class="row" style="gap:10px"><span class="eyebrow">Encounter Worship presents</span>${isToday(feat)?'<span class="pill live">Tonight</span>':""}</div>
+      <h1 style="margin-top:16px"><span class="script">${esc(feat.title)}</span>${esc(feat.sub)}</h1>
+      <p class="lead">${fmtDate(feat.date,{weekday:"long",month:"long",day:"numeric",year:"numeric"})} · Doors and worship begin at ${fmtTime(feat.date)}<br>${esc(feat.venue)}, ${esc(feat.place)}</p>
+      <div class="row"><button class="btn btn-gold" data-act="register" data-id="${feat.id}">Register now</button><a class="btn btn-line" href="${MAPS}" target="_blank" rel="noopener">Get directions</a></div>
+    </div>` : `<div><div class="eyebrow">Encounter Worship Ministries</div><h1 style="margin-top:16px"><span class="script">Release the</span>Sound of <span class="gold-text">Heaven</span></h1><p class="lead">Join us online every Wednesday for Sound Encounter, and watch this page for our next Worship Night.</p><div class="row"><a class="btn btn-gold" href="#collective">Join the Collective</a></div></div>`}
+    <div class="hero-figure"><img src="assets/ew-figure.png" alt="Encounter Worship emblem: a worshipper kneeling with arms open before gold flames"></div>
+  </div></section>
+  <section class="light"><div class="wrap stack" style="gap:28px">
+    <div class="row" style="justify-content:space-between;align-items:flex-end"><div class="stack" style="gap:10px"><div class="eyebrow">Events &amp; Registration</div><h2>Upcoming encounters</h2></div><p class="lead" style="max-width:44ch">Register ahead so we can welcome you by name. Walk-ins are always welcome.</p></div>
+    <div class="elist">${list.map(e=>eventRow(e,true)).join("") || `<div class="empty">New dates are coming soon. Join the Collective to hear first.</div>`}</div>
+  </div></section>
+  <section class="mist"><div class="wrap split">
+    <div class="stack"><div class="eyebrow">Sound Encounter</div><h2>Every Wednesday at 9 pm on Zoom</h2><p class="lead">Sound Encounter Fireside Chats are our Bible study, where we teach how to be effective worship leaders from a Kingdom perspective and mandate. Our last session of 2026 is Wednesday, December 2.</p></div>
+    <div class="box stack" style="gap:12px"><h3 style="margin:0">Join a session</h3><p class="muted">Register for any Wednesday and we'll send you the Zoom details.</p><div class="row">${upcoming().filter(e=>e.type==="fireside").map(e=>`<button class="btn btn-line btn-sm" data-act="register" data-id="${e.id}">${fmtDate(e.date,{month:"short",day:"numeric"})}</button>`).join("")}</div></div>
+  </div></section>
+  <section><div class="wrap">${collectiveBand()}</div></section>`;
+};
+
+function openRegister(id){
+  const e = EVENTS.find(x=>x.id===id); if(!e) return;
+  const m = window.ME;
+  openModal(`<div class="stack"><div class="eyebrow" style="color:#9A7526">${TYPE_LABEL[e.type]} registration</div><h2 style="font-size:1.6rem">${esc(e.title)}${e.sub?`: ${esc(e.sub)}`:""}</h2><p class="muted" style="color:var(--muted-light)">${fmtDate(e.date,{weekday:"long",month:"long",day:"numeric"})} · ${fmtTime(e.date)} ET · ${esc(e.venue)}${e.place!=="Online"?", "+esc(e.place):""}</p>
+  <form id="f-reg" data-id="${e.id}" class="fgrid on-light" style="margin-top:8px">
+    <div class="field"><label for="r-name">Full name</label><input id="r-name" required autocomplete="name" value="${esc(m?.name||"")}"></div>
+    <div class="field"><label for="r-email">Email</label><input id="r-email" type="email" required autocomplete="email" value="${esc(m?.email||"")}"></div>
+    <div class="field"><label for="r-phone">Phone (optional)</label><input id="r-phone" type="tel" autocomplete="tel"></div>
+    <div class="field"><label for="r-guests">Bringing guests?</label><select id="r-guests"><option value="0">Just me</option><option value="1">+1 guest</option><option value="2">+2 guests</option><option value="3">+3 guests</option><option value="4">+4 guests</option><option value="5">+5 guests</option></select></div>
+    <div class="field full"><label for="r-how">How did you hear about us?</label><select id="r-how"><option>Instagram</option><option>Facebook</option><option>A friend</option><option>My church</option><option>Other</option></select></div>
+    <label class="check full"><input type="checkbox" id="r-news" ${m?"checked":""}> <span>Send me Encounter Worship Collective updates and our newsletter. I can unsubscribe any time.</span></label>
+    <p class="full err" id="r-err" role="alert"></p>
+    <div class="full row" style="justify-content:flex-end"><button class="btn btn-navy" type="submit">Complete registration</button></div>
+  </form></div>`);
+}
+function regDone(r, e, already){
+  openModal(`<div class="stack"><div class="eyebrow" style="color:#9A7526">${already?"You're already registered":"You're registered"}</div><h2 style="font-size:1.6rem">See you there, ${esc(r.name.split(" ")[0])}!</h2>
+  <div class="ticket"><div><div style="font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#F3D682">${TYPE_LABEL[e.type]}</div><b style="display:block;margin:6px 0">${esc(e.title)}${e.sub?`: ${esc(e.sub)}`:""}</b><span style="font-size:.85rem;color:#C9D1E6">${fmtDate(e.date,{weekday:"long",month:"long",day:"numeric"})} · ${fmtTime(e.date)} ET</span></div><div style="text-align:right"><div style="font-size:.7rem;letter-spacing:.2em;color:#C9D1E6">CHECK-IN CODE</div><div class="code">${esc(r.code)}</div></div></div>
+  <p class="muted" style="color:var(--muted-light)">${e.place==="Online"?"We'll email the Zoom details to you before the session.":"Show this code, or just give your name, at the welcome table. A screenshot works."}</p>
+  <div class="row">${window.ME?"":`<a class="btn btn-navy" href="#collective" data-act="close-modal">Create my Collective account</a>`}<button class="btn btn-line" data-act="close-modal">Done</button></div></div>`);
+}
+
+/* ---------- about ---------- */
+P.about = () => `
+  ${pageHero("About EW","A Kingdom mandate for <span class='gold-text'>worship</span>","Encounter Worship Ministries draws together believers who are worshippers, musicians, creatives and media, and trains them to minister in power and release the Sound of Heaven into the earth.")}
+  <section class="light"><div class="wrap split">
+    <div class="stack"><div class="eyebrow">Our mandate</div><h2>Transform. Empower. Impact!</h2><p class="lead">We believe worship is more than a song before a sermon. It is a priestly assignment. When God's people carry His presence with skill and surrender, atmospheres shift, hearts are healed and cities are touched.</p></div>
+    <div class="grid" style="gap:14px">${[
+      ["Transform","We raise worship leaders who know the Word, hear the Spirit and lead with excellence."],
+      ["Empower","We create spaces for prophetic worship where the Sound of Heaven is heard on earth."],
+      ["Impact","We carry that sound outside the walls through outreach, mentoring and service."]
+    ].map(([t,d],i)=>`<div class="card" style="flex-direction:row;gap:18px;align-items:flex-start"><span class="edate"><b style="font-size:1.7rem;color:#C9A044">0${i+1}</b></span><div><h3>${t}</h3><p class="muted">${d}</p></div></div>`).join("")}</div>
+  </div></section>
+  <section class="mist"><div class="wrap stack" style="gap:34px">
+    <div class="stack" style="gap:10px"><div class="eyebrow">What we do</div><h2>Four streams, one fire</h2></div>
+    <div class="grid g4">${[["Sound Encounter Fireside Chats","Our Bible study, teaching how to be effective worship leaders from a Kingdom perspective and mandate."],["Encounter Worship Nights","Hosted gatherings of deep, prophetic worship that transform lives."],["Events","We are available to minister at your conference, service, retreat or youth event."],["Ripple Effect Outreach","How we give back to the community and support social causes."]].map(([t,d])=>`<div class="card"><h3>${t}</h3><p class="muted">${d}</p></div>`).join("")}</div>
+  </div></section>
+  <section class="light"><div class="wrap stack" style="gap:34px">
+    <div class="stack" style="gap:10px"><div class="eyebrow">What we value</div><h2>Our values</h2></div>
+    <div class="grid g3">${[["Presence first","His presence is the priority over performance, platform or polish."],["Word-rooted","Everything we sing and teach flows from Scripture."],["Excellence","Skill is an offering. We prepare as unto the Lord."],["Family","We are a team that prays together, grows together and serves together."],["Prophetic","We make room for the Spirit to speak and move."],["Compassion","Worship overflows into practical love for our neighbours."]].map(([t,d])=>`<div class="card"><h3>${t}</h3><p class="muted">${d}</p></div>`).join("")}</div>
+  </div></section>
+  <section><div class="wrap">${collectiveBand()}</div></section>`;
+
+/* ---------- shop: t-shirt pre-orders ---------- */
+const PRICE = 25, ETRANSFER = "inspiredmusiquelabel@gmail.com";
+const SIZES = ["XS","S","M","L","XL","2XL","3XL"];
+const SHIRTS = [
+  {id:"logo", name:"EW Logo Tee", desc:"The Encounter Worship logo in gold and white.", bg:"#0B1C45", img:"assets/ew-logo-white.png", w:84, y:64},
+  {id:"worshipper", name:"Kneeling Worshipper Tee", desc:"Our worshipper on their knees before the flame.", bg:"#FFFFFF", img:"assets/ew-team.png", w:88, y:60}
+];
+function shirtArt(s){
+  const x = 120 - s.w/2;
+  return `<svg viewBox="0 0 240 220" aria-hidden="true"><path d="M60 30l28-12c4 10 20 14 32 14s28-4 32-14l28 12 26 40-30 16-12-14v118H76V72L64 86 34 70z" fill="${s.bg}" stroke="${s.bg==="#FFFFFF"?"#CFD6E4":"none"}" stroke-width="1.5"/><image href="${s.img}" x="${x}" y="${s.y}" width="${s.w}" height="${s.w}" preserveAspectRatio="xMidYMid meet"/></svg>`;
+}
+P.shop = () => `${pageHero("EW Shop","T-shirt <span class='gold-text'>pre-orders</span>","Order your Encounter Worship tee today. $25.00 per shirt, paid by Interac e-Transfer. Shirts will be ready to ship in about 2 weeks.")}
+  <section class="mist"><div class="wrap stack" style="gap:28px">
+    <div class="grid g2">${SHIRTS.map(s=>`<article class="product"><div class="art">${shirtArt(s)}</div><div class="body"><div class="row" style="justify-content:space-between"><h3 style="font-size:1.05rem">${s.name}</h3><span class="pill">Pre-order</span></div><p class="muted">${s.desc}</p><span class="price">${money(PRICE)}</span><span class="muted" style="font-size:.78rem">Mockup shown. Final print may vary slightly.</span></div></article>`).join("")}</div>
+    <form class="card fgrid" id="f-order" novalidate>
+      <div class="full stack" style="gap:6px"><div class="eyebrow">Order form</div><h2 style="font-size:1.8rem">Choose your shirts and sizes</h2><p class="muted">Enter how many of each size you'd like. Leave the rest at 0.</p></div>
+      ${SHIRTS.map(s=>`<fieldset class="full sizegrid"><legend>${s.name} · ${money(PRICE)} each</legend><div class="sg">${SIZES.map(z=>`<label class="qbox"><span>${z}</span><input type="number" min="0" max="50" value="0" inputmode="numeric" data-q="${s.id}" data-size="${z}" aria-label="${s.name} size ${z} quantity"></label>`).join("")}</div></fieldset>`).join("")}
+      <div class="full totalbar"><span id="o-count">0 shirts</span><b id="o-total">$0.00</b></div>
+      <div class="field"><label for="o-name">Full name</label><input id="o-name" required autocomplete="name" value="${esc(window.ME?.name||"")}"></div>
+      <div class="field"><label for="o-email">Email</label><input id="o-email" type="email" required autocomplete="email" value="${esc(window.ME?.email||"")}"></div>
+      <div class="field"><label for="o-phone">Phone</label><input id="o-phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="o-fulfil">How would you like to receive it?</label><select id="o-fulfil"><option value="pickup">Pick up from Encounter Worship</option><option value="ship">Ship to me</option></select></div>
+      <div class="field full" id="o-addr-wrap" hidden><label for="o-addr">Shipping address</label><textarea id="o-addr" style="min-height:80px" autocomplete="street-address"></textarea><span class="muted" style="font-size:.8rem">We'll confirm any shipping cost with you by email before your order ships.</span></div>
+      <div class="field full"><label for="o-notes">Notes (optional)</label><input id="o-notes"></div>
+      <label class="check full"><input type="checkbox" id="o-news"> <span>Send me Encounter Worship Collective updates and our newsletter.</span></label>
+      <div class="full etbox"><b>How to pay:</b> after you place your order, send an Interac e-Transfer for your total to <b>${ETRANSFER}</b>. Put your order number in the message.</div>
+      <p class="full err" id="o-err" role="alert"></p>
+      <div class="full row" style="justify-content:flex-end"><button class="btn btn-navy" type="submit">Place pre-order</button></div>
+    </form>
+  </div></section>`;
+function orderTotals(){
+  let n=0; $$("[data-q]").forEach(i=>{ n += Math.max(0, parseInt(i.value)||0); });
+  $("#o-count").textContent = n + (n===1?" shirt":" shirts"); $("#o-total").textContent = money(n*PRICE);
+}
+function orderDone(o){
+  openModal(`<div class="stack"><div class="eyebrow" style="color:#9A7526">Pre-order received</div><h2 style="font-size:1.6rem">Thank you! One last step</h2>
+  <div class="ticket"><div><div style="font-size:.75rem;letter-spacing:.2em;color:#F3D682">ORDER NUMBER</div><div class="code">${esc(o.number)}</div><span style="font-size:.85rem;color:#C9D1E6">${o.items.map(i=>`${i.qty} × ${esc(i.designName)} (${i.size})`).join("<br>")}</span></div><div style="text-align:right"><div style="font-size:.7rem;letter-spacing:.2em;color:#C9D1E6">AMOUNT DUE</div><div class="code">${money(o.total)}</div></div></div>
+  <div class="etbox"><p><b>Send an Interac e-Transfer of ${money(o.total)} to:</b></p><p class="row" style="margin:8px 0"><b style="font-size:1.05rem;word-break:break-all">${ETRANSFER}</b><button class="btn btn-line btn-sm" data-act="copy" data-t="${ETRANSFER}">Copy email</button></p><p>In the message, write your order number <b>${esc(o.number)}</b> so we can match your payment.</p></div>
+  <p class="muted" style="color:var(--muted-light)">Your shirts will be ready to ship in about 2 weeks. Please take a screenshot of this page for your records.</p>
+  <button class="btn btn-navy" data-act="close-modal">Done</button></div>`);
+}
+
+/* ---------- collective ---------- */
+P.collective = () => {
+  const m = window.ME;
+  if (!m) return `${pageHero("Encounter Worship Collective","Join the <span class='gold-text'>Collective</span>","The Collective is the EW family beyond the stage: friends, partners and intercessors who want to stay close to what God is doing through Encounter Worship.")}
+  <section class="light"><div class="wrap stack" style="gap:34px">
+    <div class="grid g4">${[["The latest on EW","Updates on events and projects."],["Online alerts","Messages when we go live."],["Prayer","Support the ministry in prayer and share your requests."],["Member discounts","On events, when applicable."]].map(([t,d])=>`<div class="card" style="padding:20px"><h4>${t}</h4><p class="muted" style="font-size:.9rem">${d}</p></div>`).join("")}</div>
+    <div class="grid" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px" id="col-grid">
+    <form class="card fgrid" id="f-join">
+      <div class="full"><div class="eyebrow">New member</div><h3 style="font-size:1.4rem;margin-top:6px">Create your account</h3><p class="muted">Membership is free.</p></div>
+      <div class="field"><label for="j-name">Full name</label><input id="j-name" required autocomplete="name"></div>
+      <div class="field"><label for="j-email">Email</label><input id="j-email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="j-pw">Create a password</label><input id="j-pw" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></div>
+      <div class="field"><label for="j-pw2">Confirm password</label><input id="j-pw2" type="password" required minlength="8" autocomplete="new-password"></div>
+      <div class="field"><label for="j-city">City</label><input id="j-city" autocomplete="address-level2"></div>
+      <div class="field"><label for="j-phone">Mobile (optional)</label><input id="j-phone" type="tel" autocomplete="tel"></div>
+      <fieldset class="full" style="border:0;padding:0;margin:0"><legend style="font-size:.82rem;font-weight:700;margin-bottom:8px">I'd like to support by</legend><div class="grid g2" style="gap:8px">${["Praying for the ministry","Volunteering at events","Serving in outreach","Giving financially"].map((x,i)=>`<label class="check"><input type="checkbox" name="j-int" value="${x}" ${i===0?"checked":""}> ${x}</label>`).join("")}</div></fieldset>
+      <label class="check full"><input type="checkbox" id="j-consent" required> <span>I agree to receive emails and messages from Encounter Worship Ministries. I can unsubscribe any time.</span></label>
+      <p class="full err" id="j-err" role="alert"></p>
+      <div class="full row" style="justify-content:flex-end"><button class="btn btn-navy" type="submit">Join the Collective</button></div>
+    </form>
+    <form class="card stack" id="f-login" style="align-self:start">
+      <div><div class="eyebrow">Members</div><h3 style="font-size:1.4rem;margin-top:6px">Sign in</h3></div>
+      <div class="field"><label for="l-email">Email</label><input id="l-email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="l-pw">Password</label><input id="l-pw" type="password" required autocomplete="current-password"></div>
+      <p class="err" id="l-err" role="alert"></p>
+      <button class="btn btn-navy" type="submit">Sign in</button>
+      <p class="muted" style="font-size:.85rem">Forgot your password? Speak with an Encounter Worship team member and we'll help you reset it.</p>
+    </form></div>
+  </div></section>`;
+  return `<section class="page-hero" style="padding:56px 0 40px"><img class="bg-mark" src="assets/ew-mark.png" alt=""><div class="wrap row" style="justify-content:space-between;align-items:flex-end">
+    <div class="row" style="gap:18px"><div class="avatar" style="width:64px;height:64px;font-size:1.3rem">${esc(initials(m.name))}</div><div><div class="eyebrow">Collective member</div><h1 style="font-size:clamp(1.8rem,3.6vw,2.8rem);margin:8px 0 0">Welcome, ${esc(m.name.split(" ")[0])}</h1></div></div>
+    <button class="btn btn-line btn-sm" data-act="logout">Sign out</button></div></section>
+  <section class="mist" style="padding:40px 0 80px"><div class="wrap grid" style="grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px" id="mem-grid">
+    <div class="stack" style="gap:22px">
+      <div class="box"><h3>Latest on EW</h3><div class="row" style="padding:14px 0;border-top:1px solid var(--line-light);align-items:flex-start;flex-wrap:nowrap"><span class="pill" style="flex-shrink:0">Welcome</span><p>Thank you for joining the Encounter Worship Collective. Updates on events, projects and online sessions will appear here.</p></div></div>
+      <div class="box"><h3>Upcoming</h3><div class="stack" style="gap:12px">${upcoming().map(e=>`<div class="row" style="justify-content:space-between;flex-wrap:nowrap;gap:10px"><div><b style="font-size:.92rem">${esc(e.title)}${e.sub?`: ${esc(e.sub)}`:""}</b><div class="muted" style="font-size:.8rem">${fmtDate(e.date)} · ${fmtTime(e.date)} ET · ${esc(e.venue)}</div></div><button class="btn btn-navy btn-sm" data-act="register" data-id="${e.id}">Register</button></div>`).join("") || '<div class="empty">New dates coming soon.</div>'}</div></div>
+      <form class="box" id="f-prayer"><h3>Send a prayer request</h3><p class="muted" style="margin-bottom:12px">Your request goes privately to the Encounter Worship prayer team.</p><textarea id="pr-text" required aria-label="Prayer request"></textarea><div class="row" style="justify-content:flex-end;margin-top:12px"><button class="btn btn-navy btn-sm" type="submit">Send request</button></div></form>
+    </div>
+    <div class="stack" style="gap:22px">
+      <div class="box"><h3>When we're online</h3><p class="muted" style="margin-bottom:12px">Choose how you'd like to hear when EW goes live.</p>${["Email","Text message"].map(ch=>`<label class="check" style="margin-bottom:8px"><input type="checkbox" data-act="alert" value="${ch}" ${m.alerts?.includes(ch)?"checked":""}> ${ch}${ch==="Text message"&&!m.phone?' <span class="muted" style="font-size:.8rem">(add a mobile number with the team)</span>':""}</label>`).join("")}</div>
+      <div class="box"><h3>My account</h3><p><b>${esc(m.name)}</b></p><p class="muted">${esc(m.email)}${m.city?" · "+esc(m.city):""}</p><div class="row" style="margin-top:10px">${(m.interests||[]).map(i=>`<span class="pill">${esc(i)}</span>`).join("")}</div></div>
+      <form class="box stack" id="f-pw" style="gap:10px"><h3 style="margin:0">Change password</h3><div class="field"><label for="pw-cur">Current password</label><input id="pw-cur" type="password" required autocomplete="current-password"></div><div class="field"><label for="pw-new">New password</label><input id="pw-new" type="password" required minlength="8" autocomplete="new-password"></div><p class="err" id="pw-err" role="alert"></p><button class="btn btn-line btn-sm" type="submit" style="align-self:flex-start">Update password</button></form>
+    </div>
+  </div></section>`;
+};
+
+/* ---------- team check-in & orders (PIN protected, not in the menu) ---------- */
+const CI = { tab:"checkin", ev:null, regs:[], q:"", orders:[], people:null };
+P["check-in"] = () => {
+  if (!store.sget("ew-pin")) return `<section class="hero" style="padding:90px 0"><canvas id="embers"></canvas><div class="wrap" style="grid-template-columns:1fr;max-width:480px">
+    <form class="modal" id="f-pin" style="margin:0 auto;width:100%"><img src="assets/ew-team.png" alt="" style="width:100px;margin:0 auto 10px"><h2 style="font-size:1.5rem;text-align:center">Team check-in</h2><p class="muted" style="text-align:center;color:var(--muted-light);margin-bottom:18px">Guest list, walk-ins and shirt orders.</p>
+    <div class="stack on-light"><div class="field"><label for="pin">Team PIN</label><input id="pin" type="password" inputmode="numeric" required autocomplete="off"></div><p class="err" id="pin-err" role="alert"></p><button class="btn btn-navy" type="submit">Open</button></div></form></div></section>`;
+  const evs = upcoming(); if (!CI.ev) CI.ev = (evs[0]||EVENTS[0]).id;
+  const tabs = [["checkin","Check-in"],["orders","Shirt orders"],["people","Collective & newsletter"]];
+  return `<section class="page-hero" style="padding:36px 0 26px"><div class="wrap row" style="justify-content:space-between;align-items:flex-end">
+    <div><div class="eyebrow">Team only</div><h1 style="font-size:clamp(1.8rem,4vw,2.6rem);margin:8px 0 0">Welcome table</h1></div>
+    <div class="row"><div class="chips">${tabs.map(([k,l])=>`<button class="chip ${CI.tab===k?"on":""}" data-act="ci-tab" data-k="${k}">${l}</button>`).join("")}</div><button class="btn-ghost" data-act="ci-lock">Lock</button></div></div></section>
+  <section class="mist" style="padding:30px 0 80px"><div class="wrap stack" style="gap:22px" id="ci-body">${CITAB[CI.tab]()}</div></section>`;
+};
+const CITAB = {};
+CITAB.checkin = () => {
+  const evs = upcoming().length ? upcoming() : EVENTS;
+  return `<div class="field" style="max-width:560px"><label for="ci-ev">Event</label><select id="ci-ev" data-act="ci-ev">${evs.map(x=>`<option value="${x.id}" ${x.id===CI.ev?"selected":""}>${fmtDate(x.date)} · ${esc(x.title)}${x.sub?": "+esc(x.sub):""}</option>`).join("")}</select></div>
+  <div class="stats panel-light" style="padding:0;background:none" id="ci-stats"></div>
+  <div class="grid" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px" id="ci-grid">
+    <div class="box stack" style="gap:14px">
+      <div class="row" style="justify-content:space-between"><h3 style="margin:0">Guest list</h3><div class="row"><button class="btn btn-line btn-sm" data-act="ci-refresh">Refresh</button><button class="btn btn-line btn-sm" data-act="copy-list" data-scope="news">Copy newsletter list</button><button class="btn btn-line btn-sm" data-act="copy-list" data-scope="all">Copy all (CSV)</button></div></div>
+      <input id="ci-q" placeholder="Search name, email or code" value="${esc(CI.q)}" aria-label="Search guests" autocomplete="off">
+      <div class="table-wrap" id="ci-list"><div class="empty">Loading guest list…</div></div>
+    </div>
+    <form class="box stack on-light" id="f-walkin" style="gap:12px;align-self:start"><h3 style="margin:0">Walk-in registration</h3><p class="muted" style="font-size:.88rem">Registers and checks in at the same time.</p>
+      <div class="field"><label for="w-name">Full name</label><input id="w-name" required autocomplete="off"></div>
+      <div class="field"><label for="w-email">Email</label><input id="w-email" type="email" autocomplete="off"></div>
+      <div class="field"><label for="w-phone">Phone (optional)</label><input id="w-phone" type="tel" autocomplete="off"></div>
+      <div class="field"><label for="w-guests">Party size</label><select id="w-guests"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="4">5</option><option value="5">6</option></select></div>
+      <label class="check"><input type="checkbox" id="w-news"> <span>Yes, add me to the Encounter Worship Collective newsletter</span></label>
+      <p class="err" id="w-err" role="alert"></p>
+      <button class="btn btn-navy" type="submit">Register &amp; check in</button>
+    </form>
+  </div><p class="muted" style="font-size:.82rem">The list refreshes on its own every 20 seconds, so several devices can check people in at once.</p>`;
+};
+function drawCheckin(){
+  const regs = CI.regs, q = CI.q.toLowerCase();
+  const ci = regs.filter(r=>r.checkedIn), heads = regs.reduce((a,r)=>a+1+Number(r.guests||0),0), arrived = ci.reduce((a,r)=>a+1+Number(r.guests||0),0);
+  const st = $("#ci-stats"); if (st) st.innerHTML = [[regs.length,"Registered"],[ci.length,"Checked in"],[arrived+" / "+heads,"People arrived (incl. guests)"],[regs.filter(r=>r.newsletter).length,"Newsletter opt-ins"]].map(([n,l])=>`<div class="stat"><b class="num">${n}</b><span>${l}</span></div>`).join("");
+  const shown = regs.filter(r=>!q || r.name.toLowerCase().includes(q) || (r.email||"").includes(q) || r.code.toLowerCase().includes(q));
+  const el = $("#ci-list"); if (!el) return;
+  el.innerHTML = `<table><thead><tr><th>Guest</th><th>Code</th><th>Party</th><th>Newsletter</th><th></th></tr></thead><tbody>${shown.map(r=>`<tr><td><b>${esc(r.name)}</b><div class="muted" style="font-size:.8rem">${esc(r.email||"no email")}${r.phone?" · "+esc(r.phone):""}${r.source==="door"?" · walk-in":""}</div></td><td class="num">${esc(r.code)}</td><td class="num">${1+Number(r.guests||0)}</td><td>${r.newsletter?'<span class="pill ok">Yes</span>':(r.email?`<button class="btn-ghost" style="color:#8A6720" data-act="ci-news" data-id="${r.id}">+ Add</button>`:"")}</td><td style="text-align:right">${r.checkedIn?`<button class="pill ok" style="cursor:pointer" data-act="ci-toggle" data-id="${r.id}" title="Tap to undo">✓ ${r.checkedInAt?fmtTime(r.checkedInAt):"In"}</button>`:`<button class="btn btn-navy btn-sm" data-act="ci-toggle" data-id="${r.id}">Check in</button>`}</td></tr>`).join("") || `<tr><td colspan="5"><div class="empty">${regs.length?"No guests match. Register them as a walk-in.":"No registrations yet."}</div></td></tr>`}</tbody></table>`;
+}
+async function loadRegs(quiet){
+  try { const d = await api("/admin/regs?eventId="+encodeURIComponent(CI.ev), null, adminH()); CI.regs = d.regs; drawCheckin(); }
+  catch(e){ if (e.status===401){ store.sset("ew-pin",null); rerender(); toast(e.message); } else if(!quiet) toast(e.message); }
+}
+CITAB.orders = () => `<div class="stats panel-light" style="padding:0;background:none" id="or-stats"></div>
+  <div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Print summary</h3><button class="btn btn-line btn-sm" data-act="or-refresh">Refresh</button></div><div class="table-wrap" id="or-sum"><div class="empty">Loading…</div></div></div>
+  <div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">All pre-orders</h3><button class="btn btn-line btn-sm" data-act="copy-orders">Copy orders (CSV)</button></div><div class="table-wrap" id="or-list"></div></div>`;
+function drawOrders(){
+  const os = CI.orders; const paid = os.filter(o=>o.paid);
+  const sum = a => a.reduce((t,o)=>t+o.total,0);
+  $("#or-stats").innerHTML = [[os.length,"Orders"],[os.reduce((t,o)=>t+o.count,0),"Shirts ordered"],[money(sum(paid)),"e-Transfers received"],[money(sum(os)-sum(paid)),"Still to receive"]].map(([n,l])=>`<div class="stat"><b class="num">${n}</b><span>${l}</span></div>`).join("");
+  $("#or-sum").innerHTML = `<table><thead><tr><th>Design</th>${SIZES.map(z=>`<th>${z}</th>`).join("")}<th>Total</th></tr></thead><tbody>${SHIRTS.map(s=>{ const c=z=>os.reduce((t,o)=>t+o.items.filter(i=>i.design===s.id&&i.size===z).reduce((a,i)=>a+i.qty,0),0); const tot=SIZES.reduce((a,z)=>a+c(z),0); return `<tr><td><b>${s.name}</b></td>${SIZES.map(z=>`<td class="num">${c(z)||"·"}</td>`).join("")}<td class="num"><b>${tot}</b></td></tr>`; }).join("")}</tbody></table>`;
+  $("#or-list").innerHTML = `<table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Delivery</th><th>Payment</th></tr></thead><tbody>${os.map(o=>`<tr><td class="num"><b>${esc(o.number)}</b><div class="muted" style="font-size:.78rem">${fmtDate(o.at)} ${fmtTime(o.at)}</div></td><td><b>${esc(o.name)}</b><div class="muted" style="font-size:.8rem">${esc(o.email)}${o.phone?" · "+esc(o.phone):""}</div></td><td style="font-size:.85rem">${o.items.map(i=>`${i.qty} × ${esc(i.designName)} ${i.size}`).join("<br>")}</td><td class="num"><b>${money(o.total)}</b></td><td style="font-size:.85rem">${o.fulfil==="ship"?"Ship: "+esc(o.address):"Pick up"}${o.notes?`<div class="muted">${esc(o.notes)}</div>`:""}</td><td>${o.paid?`<button class="pill ok" style="cursor:pointer" data-act="or-paid" data-id="${o.id}" data-p="0" title="Tap to undo">✓ Paid</button>`:`<button class="btn btn-navy btn-sm" data-act="or-paid" data-id="${o.id}" data-p="1">Mark paid</button>`}</td></tr>`).join("") || '<tr><td colspan="6"><div class="empty">No pre-orders yet.</div></td></tr>'}</tbody></table>`;
+}
+async function loadOrders(){ try { CI.orders = (await api("/admin/orders", null, adminH())).orders; drawOrders(); } catch(e){ toast(e.message); } }
+CITAB.people = () => `<div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Newsletter list</h3><button class="btn btn-line btn-sm" data-act="copy-subs">Copy newsletter list (CSV)</button></div><div class="table-wrap" id="pp-subs"><div class="empty">Loading…</div></div></div>
+  <div class="box"><h3>Collective members</h3><div class="table-wrap" id="pp-mem"></div></div>
+  <div class="box"><h3>Prayer requests</h3><div id="pp-pr"></div></div>`;
+async function loadPeople(){
+  try { const d = CI.people = await api("/admin/people", null, adminH());
+    $("#pp-subs").innerHTML = `<table><thead><tr><th>Name</th><th>Email</th><th>Joined from</th><th>Date</th></tr></thead><tbody>${d.subscribers.map(s=>`<tr><td>${esc(s.name)}</td><td>${esc(s.email)}</td><td>${esc(s.source)}</td><td>${fmtDate(s.at)}</td></tr>`).join("") || '<tr><td colspan="4"><div class="empty">No subscribers yet.</div></td></tr>'}</tbody></table>`;
+    $("#pp-mem").innerHTML = `<table><thead><tr><th>Name</th><th>Email</th><th>City</th><th>Supports by</th><th>Alerts</th></tr></thead><tbody>${d.members.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.email)}</td><td>${esc(m.city||"")}</td><td style="font-size:.85rem">${esc((m.interests||[]).join(", "))}</td><td style="font-size:.85rem">${esc((m.alerts||[]).join(", "))}</td></tr>`).join("") || '<tr><td colspan="5"><div class="empty">No members yet.</div></td></tr>'}</tbody></table>`;
+    $("#pp-pr").innerHTML = d.prayers.map(p=>`<div style="padding:12px 0;border-top:1px solid var(--line-light)"><p>${esc(p.text)}</p><span class="muted" style="font-size:.8rem">${esc(p.name)} · ${esc(p.email)} · ${fmtDate(p.at)}</span></div>`).join("") || '<div class="empty">No prayer requests yet.</div>';
+  } catch(e){ toast(e.message); }
+}
+
+/* ---------- router ---------- */
+const ROUTES = Object.keys(P);
+let timer, poll, current = null;
+function route(){ const h=(location.hash||"#events").slice(1); render(ROUTES.includes(h)?h:"events"); }
+function render(page){
+  current = page; clearInterval(timer); clearInterval(poll); cancelAnimationFrame(window._raf);
+  $("#app").innerHTML = P[page]();
+  $$(".navlinks a").forEach(a=>a.classList.toggle("on", a.dataset.nav===page));
+  $("#mmenu").classList.remove("open");
+  window.scrollTo(0,0); after(page);
+}
+function rerender(){ const y=window.scrollY; clearInterval(poll); cancelAnimationFrame(window._raf); $("#app").innerHTML = P[current](); after(current); window.scrollTo(0,y); }
+function after(page){
+  if ($("#embers")) embers($("#embers"));
+  responsiveGrids();
+  if (page==="shop") orderTotals();
+  if (page==="check-in" && store.sget("ew-pin")){
+    if (CI.tab==="checkin"){ drawCheckin(); loadRegs(); poll=setInterval(()=>loadRegs(true),20000); }
+    if (CI.tab==="orders") loadOrders();
+    if (CI.tab==="people") loadPeople();
+  }
+  $("#navCol").textContent = window.ME ? "My Collective" : "Join the Collective";
+}
+function responsiveGrids(){ const narrow = innerWidth < 900; ["#ci-grid","#mem-grid","#col-grid"].forEach(s=>{ const g=$(s); if(g) g.style.gridTemplateColumns = narrow ? "1fr" : ""; }); }
+addEventListener("resize", responsiveGrids);
+addEventListener("hashchange", route);
+
+/* ---------- embers ---------- */
+function embers(cv){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const ctx = cv.getContext("2d"); let W,H; const dpr=Math.min(2,devicePixelRatio||1);
+  W=cv.clientWidth; H=cv.clientHeight; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+  const N = Math.round(Math.min(80, W/14)); const mk=init=>({x:Math.random()*W, y:init?Math.random()*H:H+10, r:Math.random()*2.2+.4, v:Math.random()*.6+.2, w:Math.random()*6.28, a:Math.random()*.6+.25});
+  const ps = Array.from({length:N},()=>mk(true));
+  (function frame(){ if(!document.body.contains(cv)) return; ctx.clearRect(0,0,W,H);
+    ps.forEach((p,i)=>{ p.y-=p.v; p.w+=.02; p.x+=Math.sin(p.w)*.35; if(p.y<-10) ps[i]=mk(false); const life=p.y/H;
+      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4); g.addColorStop(0,`rgba(243,214,130,${p.a*Math.min(1,life+.2)})`); g.addColorStop(1,"rgba(243,214,130,0)"); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*4,0,7); ctx.fill(); });
+    window._raf=requestAnimationFrame(frame); })();
+}
+
+/* ---------- modal ---------- */
+function openModal(html){ const m=$("#modal"); m.className="modal"; m.innerHTML=`<button class="x" data-act="close-modal" aria-label="Close">✕</button>`+html; $("#modalBg").classList.add("open"); setTimeout(()=>{ const f=m.querySelector("input,select"); f&&f.focus(); },50); }
+function closeModal(){ $("#modalBg").classList.remove("open"); }
+$("#modalBg").addEventListener("click", e=>{ if(e.target.id==="modalBg") closeModal(); });
+addEventListener("keydown", e=>{ if(e.key==="Escape") closeModal(); });
+async function copyText(t, msg){ try{ await navigator.clipboard.writeText(t); toast(msg); } catch(e){ openModal(`<h3 style="margin-bottom:12px">Copy this</h3><textarea style="min-height:220px" readonly onclick="this.select()">${esc(t)}</textarea>`); } }
+const csvCell = v => /[",\n]/.test(String(v??"")) ? `"${String(v).replace(/"/g,'""')}"` : String(v??"");
+const toCSV = rows => rows.map(r=>r.map(csvCell).join(",")).join("\n");
+const setErr = (id, msg) => { const el=$("#"+id); if(el) el.textContent = msg||""; };
+
+/* ---------- clicks ---------- */
+document.addEventListener("click", async e=>{
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const a = b.dataset.act, id = b.dataset.id;
+  if (["ci-ev","alert"].includes(a)) return;
+  switch(a){
+    case "burger": $("#mmenu").classList.toggle("open"); break;
+    case "register": openRegister(id); break;
+    case "close-modal": closeModal(); break;
+    case "copy": copyText(b.dataset.t, "Email copied"); break;
+    case "logout": try { await api("/collective/logout", {}); } catch(_){} store.set("ew-token",null); window.ME=null; rerender(); toast("You're signed out"); break;
+    case "ci-tab": CI.tab=b.dataset.k; rerender(); break;
+    case "ci-lock": store.sset("ew-pin",null); rerender(); break;
+    case "ci-refresh": loadRegs(); break;
+    case "ci-toggle": { const r=CI.regs.find(x=>x.id===id); try { const d=await api("/admin/checkin",{eventId:CI.ev,id,checked:!r.checkedIn},adminH()); Object.assign(r,d.reg); drawCheckin(); toast(r.checkedIn?`${r.name} checked in`:"Check-in undone"); } catch(er){ toast(er.message); } break; }
+    case "ci-news": { const r=CI.regs.find(x=>x.id===id); try { const d=await api("/admin/newsletter",{eventId:CI.ev,id},adminH()); Object.assign(r,d.reg); drawCheckin(); toast(`${r.name} added to the newsletter`); } catch(er){ toast(er.message); } break; }
+    case "copy-list": { const rows=CI.regs.filter(r=>b.dataset.scope==="all"||r.newsletter); copyText(toCSV([["Name","Email","Phone","Code","Party","Checked in","Newsletter"],...rows.map(r=>[r.name,r.email,r.phone,r.code,1+Number(r.guests||0),r.checkedIn?"Yes":"No",r.newsletter?"Yes":"No"])]), `Copied ${rows.length} contacts`); break; }
+    case "or-refresh": loadOrders(); break;
+    case "or-paid": { const o=CI.orders.find(x=>x.id===id); try { const d=await api("/admin/order-paid",{id,paid:b.dataset.p==="1"},adminH()); Object.assign(o,d.order); drawOrders(); toast(o.paid?`${o.number} marked paid`:"Payment mark removed"); } catch(er){ toast(er.message); } break; }
+    case "copy-orders": copyText(toCSV([["Order","Date","Name","Email","Phone","Items","Shirts","Total","Delivery","Address","Notes","Paid"],...CI.orders.map(o=>[o.number,o.at.slice(0,10),o.name,o.email,o.phone,o.items.map(i=>`${i.qty} x ${i.designName} ${i.size}`).join("; "),o.count,o.total,o.fulfil,o.address,o.notes,o.paid?"Yes":"No"])]), `Copied ${CI.orders.length} orders`); break;
+    case "copy-subs": { const s=CI.people?.subscribers||[]; copyText(toCSV([["Name","Email","Source","Date"],...s.map(x=>[x.name,x.email,x.source,x.at.slice(0,10)])]), `Copied ${s.length} contacts`); break; }
+  }
+});
+document.addEventListener("change", async e=>{
+  const t=e.target;
+  if (t.dataset.act==="ci-ev"){ CI.ev=t.value; CI.regs=[]; CI.q=""; rerender(); }
+  if (t.dataset.act==="alert"){ const alerts=$$('[data-act="alert"]').filter(x=>x.checked).map(x=>x.value); try { window.ME=(await api("/collective/prefs",{alerts})).member; toast("Preferences saved"); } catch(er){ toast(er.message); } }
+  if (t.id==="o-fulfil"){ $("#o-addr-wrap").hidden = t.value!=="ship"; }
+});
+document.addEventListener("input", e=>{
+  if (e.target.id==="ci-q"){ CI.q=e.target.value; drawCheckin(); }
+  if (e.target.dataset.q) orderTotals();
+});
+
+/* ---------- forms ---------- */
+const v = id => ($("#"+id)?.value||"").trim();
+document.addEventListener("submit", async e=>{
+  const f=e.target; e.preventDefault();
+  const btn = f.querySelector('button[type="submit"]');
+  try {
+  switch(f.id){
+    case "f-reg": { setErr("r-err"); const ev=EVENTS.find(x=>x.id===f.dataset.id);
+      const d = await withBusy(btn, ()=>api("/register",{eventId:ev.id,name:v("r-name"),email:v("r-email"),phone:v("r-phone"),guests:v("r-guests"),how:v("r-how"),newsletter:$("#r-news").checked}));
+      regDone(d.reg, ev, d.already); break; }
+    case "f-order": { setErr("o-err");
+      const items = $$("[data-q]").map(i=>({design:i.dataset.q,size:i.dataset.size,qty:parseInt(i.value)||0})).filter(i=>i.qty>0);
+      if (!items.length) return setErr("o-err","Please enter a quantity for at least one size.");
+      if (!v("o-name") || !v("o-email")) return setErr("o-err","Please enter your name and email.");
+      const d = await withBusy(btn, ()=>api("/order",{items,name:v("o-name"),email:v("o-email"),phone:v("o-phone"),fulfil:v("o-fulfil"),address:v("o-addr"),notes:v("o-notes"),newsletter:$("#o-news").checked}));
+      f.reset(); orderTotals(); $("#o-addr-wrap").hidden=true; orderDone(d.order); break; }
+    case "f-join": { setErr("j-err");
+      if (v("j-pw")!==v("j-pw2")) return setErr("j-err","Your passwords don't match.");
+      const d = await withBusy(btn, ()=>api("/collective/signup",{name:v("j-name"),email:v("j-email"),password:$("#j-pw").value,city:v("j-city"),phone:v("j-phone"),interests:$$('input[name="j-int"]:checked').map(x=>x.value),consent:$("#j-consent").checked}));
+      store.set("ew-token",d.token); window.ME=d.member; rerender(); toast("Welcome to the Collective!"); break; }
+    case "f-login": { setErr("l-err"); const d = await withBusy(btn, ()=>api("/collective/login",{email:v("l-email"),password:$("#l-pw").value})); store.set("ew-token",d.token); window.ME=d.member; rerender(); toast("Signed in"); break; }
+    case "f-pw": { setErr("pw-err"); await withBusy(btn, ()=>api("/collective/password",{current:$("#pw-cur").value,next:$("#pw-new").value})); f.reset(); toast("Password updated"); break; }
+    case "f-prayer": { await withBusy(btn, ()=>api("/collective/prayer",{text:v("pr-text")})); f.reset(); toast("Your prayer request was sent to the team"); break; }
+    case "f-pin": { setErr("pin-err"); store.sset("ew-pin", v("pin")); try { await withBusy(btn, ()=>api("/admin/check",null,adminH())); rerender(); } catch(er){ store.sset("ew-pin",null); throw er; } break; }
+    case "f-walkin": { setErr("w-err"); const d = await withBusy(btn, ()=>api("/admin/walkin",{eventId:CI.ev,name:v("w-name"),email:v("w-email"),phone:v("w-phone"),guests:v("w-guests"),newsletter:$("#w-news").checked},adminH()));
+      CI.regs.push(d.reg); CI.regs.sort((a,b)=>a.name.localeCompare(b.name)); f.reset(); drawCheckin(); toast(`${d.reg.name} registered and checked in`); $("#w-name").focus(); break; }
+  }
+  } catch(er){
+    const map = {"f-reg":"r-err","f-order":"o-err","f-join":"j-err","f-login":"l-err","f-pw":"pw-err","f-pin":"pin-err","f-walkin":"w-err"};
+    map[f.id] ? setErr(map[f.id], er.message) : toast(er.message);
+  }
+});
+
+/* ---------- start ---------- */
+window.ME = null;
+(async () => {
+  route();
+  if (store.get("ew-token")) { try { window.ME = (await api("/collective/me")).member; } catch(e){ if (e.status===401) store.set("ew-token",null); } if (current) rerender(); }
+})();
+</script>
+</body>
+
+</html>
