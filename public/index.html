@@ -483,7 +483,7 @@ function openRegister(id){
   <form id="f-reg" data-id="${e.id}" class="fgrid on-light" style="margin-top:8px">
     <div class="field"><label for="r-name">Full name</label><input id="r-name" required autocomplete="name" value="${esc(m?.name||"")}"></div>
     <div class="field"><label for="r-email">Email</label><input id="r-email" type="email" required autocomplete="email" value="${esc(m?.email||"")}"></div>
-    <div class="field"><label for="r-phone">Phone (optional)</label><input id="r-phone" type="tel" autocomplete="tel"></div>
+    <div class="field"><label for="r-phone">Phone</label><input id="r-phone" type="tel" required autocomplete="tel" placeholder="e.g. 416-555-0123"></div>
     <div class="field"><label for="r-guests">Bringing guests?</label><select id="r-guests"><option value="0">Just me</option><option value="1">+1 guest</option><option value="2">+2 guests</option><option value="3">+3 guests</option><option value="4">+4 guests</option><option value="5">+5 guests</option></select></div>
     <div class="field full"><label for="r-how">How did you hear about us?</label><select id="r-how"><option>Instagram</option><option>Facebook</option><option>A friend</option><option>My church</option><option>Other</option></select></div>
     <label class="check full"><input type="checkbox" id="r-news" ${m?"checked":""}> <span>Send me Encounter Worship Collective updates and our newsletter. I can unsubscribe any time.</span></label>
@@ -539,7 +539,7 @@ P.shop = () => `${pageHero("EW Shop","T-shirt <span class='gold-text'>pre-orders
       <div class="full totalbar"><span id="o-count">0 shirts</span><b id="o-total">$0.00</b></div>
       <div class="field"><label for="o-name">Full name</label><input id="o-name" required autocomplete="name" value="${esc(window.ME?.name||"")}"></div>
       <div class="field"><label for="o-email">Email</label><input id="o-email" type="email" required autocomplete="email" value="${esc(window.ME?.email||"")}"></div>
-      <div class="field"><label for="o-phone">Phone</label><input id="o-phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="o-phone">Phone</label><input id="o-phone" type="tel" required autocomplete="tel"></div>
       <div class="field"><label for="o-fulfil">How would you like to receive it?</label><select id="o-fulfil"><option value="pickup">Pick up from Encounter Worship</option><option value="ship">Ship to me</option></select></div>
       <div class="field full" id="o-addr-wrap" hidden><label for="o-addr">Shipping address</label><textarea id="o-addr" style="min-height:80px" autocomplete="street-address"></textarea><span class="muted" style="font-size:.8rem">We'll confirm any shipping cost with you by email before your order ships.</span></div>
       <div class="field full"><label for="o-notes">Notes (optional)</label><input id="o-notes"></div>
@@ -575,7 +575,7 @@ P.collective = () => {
       <div class="field"><label for="j-pw">Create a password</label><input id="j-pw" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></div>
       <div class="field"><label for="j-pw2">Confirm password</label><input id="j-pw2" type="password" required minlength="8" autocomplete="new-password"></div>
       <div class="field"><label for="j-city">City</label><input id="j-city" autocomplete="address-level2"></div>
-      <div class="field"><label for="j-phone">Mobile (optional)</label><input id="j-phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="j-phone">Mobile phone</label><input id="j-phone" type="tel" required autocomplete="tel"></div>
       <fieldset class="full" style="border:0;padding:0;margin:0"><legend style="font-size:.82rem;font-weight:700;margin-bottom:8px">I'd like to support by</legend><div class="grid g2" style="gap:8px">${["Praying for the ministry","Volunteering at events","Serving in outreach","Giving financially"].map((x,i)=>`<label class="check"><input type="checkbox" name="j-int" value="${x}" ${i===0?"checked":""}> ${x}</label>`).join("")}</div></fieldset>
       <label class="check full"><input type="checkbox" id="j-consent" required> <span>I agree to receive emails and messages from Encounter Worship Ministries. I can unsubscribe any time.</span></label>
       <p class="full err" id="j-err" role="alert"></p>
@@ -634,7 +634,7 @@ CITAB.checkin = () => {
     <form class="box stack on-light" id="f-walkin" style="gap:12px;align-self:start"><h3 style="margin:0">Walk-in registration</h3><p class="muted" style="font-size:.88rem">Registers and checks in at the same time.</p>
       <div class="field"><label for="w-name">Full name</label><input id="w-name" required autocomplete="off"></div>
       <div class="field"><label for="w-email">Email</label><input id="w-email" type="email" autocomplete="off"></div>
-      <div class="field"><label for="w-phone">Phone (optional)</label><input id="w-phone" type="tel" autocomplete="off"></div>
+      <div class="field"><label for="w-phone">Phone</label><input id="w-phone" type="tel" required autocomplete="off"></div>
       <div class="field"><label for="w-guests">Party size</label><select id="w-guests"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option><option value="4">5</option><option value="5">6</option></select></div>
       <label class="check"><input type="checkbox" id="w-news"> <span>Yes, add me to the Encounter Worship Collective newsletter</span></label>
       <p class="err" id="w-err" role="alert"></p>
@@ -679,7 +679,7 @@ async function loadPeople(){
 /* ---------- router ---------- */
 const ROUTES = Object.keys(P);
 let timer, poll, current = null;
-function route(){ const h=(location.hash||"#events").slice(1); render(ROUTES.includes(h)?h:"events"); }
+function route(){ const h=(location.hash||"#"+(location.pathname.replace(/^\/+|\/+$/g,"")||"events")).slice(1); render(ROUTES.includes(h)?h:"events"); }
 function render(page){
   current = page; clearInterval(timer); clearInterval(poll); cancelAnimationFrame(window._raf);
   $("#app").innerHTML = P[page]();
@@ -773,7 +773,7 @@ document.addEventListener("submit", async e=>{
     case "f-order": { setErr("o-err");
       const items = $$("[data-q]").map(i=>({design:i.dataset.q,size:i.dataset.size,qty:parseInt(i.value)||0})).filter(i=>i.qty>0);
       if (!items.length) return setErr("o-err","Please enter a quantity for at least one size.");
-      if (!v("o-name") || !v("o-email")) return setErr("o-err","Please enter your name and email.");
+      if (!v("o-name") || !v("o-email") || !v("o-phone")) return setErr("o-err","Please enter your name, email and phone number.");
       const d = await withBusy(btn, ()=>api("/order",{items,name:v("o-name"),email:v("o-email"),phone:v("o-phone"),fulfil:v("o-fulfil"),address:v("o-addr"),notes:v("o-notes"),newsletter:$("#o-news").checked}));
       f.reset(); orderTotals(); $("#o-addr-wrap").hidden=true; orderDone(d.order); break; }
     case "f-join": { setErr("j-err");

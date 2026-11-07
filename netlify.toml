@@ -5,3 +5,25 @@
 
 [functions]
   node_bundler = "esbuild"
+
+# Friendly addresses like /check-in open the matching page
+[[redirects]]
+  from = "/check-in"
+  to = "/#check-in"
+  status = 301
+[[redirects]]
+  from = "/events"
+  to = "/#events"
+  status = 301
+[[redirects]]
+  from = "/shop"
+  to = "/#shop"
+  status = 301
+[[redirects]]
+  from = "/collective"
+  to = "/#collective"
+  status = 301
+[[redirects]]
+  from = "/about"
+  to = "/#about"
+  status = 301

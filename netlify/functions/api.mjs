@@ -35,6 +35,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), { status
 const err = (msg, status = 400) => json({ error: msg }, status);
 const id = () => randomBytes(6).toString("hex");
 const clean = (v, max = 300) => String(v ?? "").trim().slice(0, max);
+const phoneOk = p => (String(p).match(/\d/g) || []).length >= 10;
 const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
 const ekey = e => createHash("sha256").update(e.toLowerCase()).digest("hex").slice(0, 32);
 const CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
@@ -97,6 +98,7 @@ export default async (req) => {
       const name = clean(body.name, 120), email = clean(body.email, 160).toLowerCase();
       if (!EVENT_IDS.has(eventId)) return err("That event isn't open for registration.");
       if (!name || !emailOk(email)) return err("Please enter your name and a valid email.");
+      if (!phoneOk(body.phone)) return err("Please enter a phone number with area code.");
       const existing = (await all(store, `regs/${eventId}/`)).find(r => r.email === email);
       if (existing) return json({ reg: { code: existing.code, name: existing.name, eventId }, already: true });
       const reg = { id: id(), eventId, name, email, phone: clean(body.phone, 40), guests: Math.min(10, Math.max(0, parseInt(body.guests) || 0)), how: clean(body.how, 60), newsletter: !!body.newsletter, code: "EW-" + code(), checkedIn: false, checkedInAt: null, source: "online", at: new Date().toISOString() };
@@ -109,6 +111,7 @@ export default async (req) => {
     if (path === "/order" && method === "POST") {
       const name = clean(body.name, 120), email = clean(body.email, 160).toLowerCase();
       if (!name || !emailOk(email)) return err("Please enter your name and a valid email.");
+      if (!phoneOk(body.phone)) return err("Please enter a phone number with area code.");
       const items = [];
       for (const it of Array.isArray(body.items) ? body.items : []) {
         const qty = Math.min(50, Math.max(0, parseInt(it.qty) || 0));
@@ -128,6 +131,7 @@ export default async (req) => {
     if (path === "/collective/signup" && method === "POST") {
       const name = clean(body.name, 120), email = clean(body.email, 160).toLowerCase(), pw = String(body.password || "");
       if (!name || !emailOk(email)) return err("Please enter your name and a valid email.");
+      if (!phoneOk(body.phone)) return err("Please enter a mobile number with area code.");
       if (pw.length < 8) return err("Your password needs at least 8 characters.");
       if (!body.consent) return err("Please agree to receive messages from Encounter Worship.");
       const k = "members/" + ekey(email);
@@ -215,6 +219,7 @@ export default async (req) => {
         const name = clean(body.name, 120), email = clean(body.email, 160).toLowerCase();
         if (!EVENT_IDS.has(eventId)) return err("Unknown event.");
         if (!name) return err("Please enter a name.");
+        if (!phoneOk(body.phone)) return err("Please enter a phone number with area code.");
         if (email && !emailOk(email)) return err("That email doesn't look right.");
         const reg = { id: id(), eventId, name, email, phone: clean(body.phone, 40), guests: Math.min(10, Math.max(0, parseInt(body.guests) || 0)), newsletter: !!body.newsletter && !!email, code: "EW-" + code(), checkedIn: true, checkedInAt: new Date().toISOString(), source: "door", at: new Date().toISOString() };
         await store.setJSON(`regs/${eventId}/${reg.id}`, reg);
