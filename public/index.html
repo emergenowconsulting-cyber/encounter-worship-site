@@ -544,7 +544,7 @@ P.shop = () => `${pageHero("EW Shop","T-shirt <span class='gold-text'>pre-orders
       <div class="field full" id="o-addr-wrap" hidden><label for="o-addr">Shipping address</label><textarea id="o-addr" style="min-height:80px" autocomplete="street-address"></textarea><span class="muted" style="font-size:.8rem">We'll confirm any shipping cost with you by email before your order ships.</span></div>
       <div class="field full"><label for="o-notes">Notes (optional)</label><input id="o-notes"></div>
       <label class="check full"><input type="checkbox" id="o-news"> <span>Send me Encounter Worship Collective updates and our newsletter.</span></label>
-      <div class="full etbox"><b>How to pay:</b> after you place your order, send an Interac e-Transfer for your total to <b>${ETRANSFER}</b>. Put your order number in the message.</div>
+      <div class="full etbox"><b>How to pay:</b> after you place your order, send an Interac e-Transfer for your total to <b>${ETRANSFER}</b> right away, with your order number in the message. Then show your order number and your e-Transfer confirmation code to the EW team member at the table so they can add it to your order.</div>
       <p class="full err" id="o-err" role="alert"></p>
       <div class="full row" style="justify-content:flex-end"><button class="btn btn-navy" type="submit">Place pre-order</button></div>
     </form>
@@ -556,7 +556,8 @@ function orderTotals(){
 function orderDone(o){
   openModal(`<div class="stack"><div class="eyebrow" style="color:#9A7526">Pre-order received</div><h2 style="font-size:1.6rem">Thank you! One last step</h2>
   <div class="ticket"><div><div style="font-size:.75rem;letter-spacing:.2em;color:#F3D682">ORDER NUMBER</div><div class="code">${esc(o.number)}</div><span style="font-size:.85rem;color:#C9D1E6">${o.items.map(i=>`${i.qty} × ${esc(i.designName)} (${i.size})`).join("<br>")}</span></div><div style="text-align:right"><div style="font-size:.7rem;letter-spacing:.2em;color:#C9D1E6">AMOUNT DUE</div><div class="code">${money(o.total)}</div></div></div>
-  <div class="etbox"><p><b>Send an Interac e-Transfer of ${money(o.total)} to:</b></p><p class="row" style="margin:8px 0"><b style="font-size:1.05rem;word-break:break-all">${ETRANSFER}</b><button class="btn btn-line btn-sm" data-act="copy" data-t="${ETRANSFER}">Copy email</button></p><p>In the message, write your order number <b>${esc(o.number)}</b> so we can match your payment.</p></div>
+  <div class="etbox"><p><b>Send an Interac e-Transfer of ${money(o.total)} to:</b></p><p class="row" style="margin:8px 0"><b style="font-size:1.05rem;word-break:break-all">${ETRANSFER}</b><button class="btn btn-line btn-sm" data-act="copy" data-t="${ETRANSFER}">Copy email</button></p><p>In the message, write your order number <b>${esc(o.number)}</b>.</p></div>
+  <div class="etbox" style="background:#EEF1F7;border-color:#DCE1EC"><p><b>Then finish at the table:</b></p><ol style="margin:8px 0 0;padding-left:20px"><li>Send the e-Transfer now from your banking app.</li><li>Your bank will show a <b>confirmation code</b> (sometimes called a reference number).</li><li>Show this screen and that confirmation code to the EW team member at the table. They'll add it to your order to confirm your payment.</li></ol><p style="margin-top:8px;font-size:.85rem">Ordering from home? Just send the e-Transfer with your order number in the message and we'll match it.</p></div>
   <p class="muted" style="color:var(--muted-light)">Your shirts will be ready to ship in about 2 weeks. Please take a screenshot of this page for your records.</p>
   <button class="btn btn-navy" data-act="close-modal">Done</button></div>`);
 }
@@ -656,13 +657,14 @@ async function loadRegs(quiet){
 }
 CITAB.orders = () => `<div class="stats panel-light" style="padding:0;background:none" id="or-stats"></div>
   <div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Print summary</h3><button class="btn btn-line btn-sm" data-act="or-refresh">Refresh</button></div><div class="table-wrap" id="or-sum"><div class="empty">Loading…</div></div></div>
-  <div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">All pre-orders</h3><button class="btn btn-line btn-sm" data-act="copy-orders">Copy orders (CSV)</button></div><div class="table-wrap" id="or-list"></div></div>`;
+  <div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">All pre-orders</h3><button class="btn btn-line btn-sm" data-act="copy-orders">Copy orders (CSV)</button></div><input id="or-q" placeholder="Search order number, name or email" aria-label="Search orders" autocomplete="off" style="margin-bottom:12px" value="${esc(CI.oq||"")}"><div class="table-wrap" id="or-list"></div></div>`;
 function drawOrders(){
   const os = CI.orders; const paid = os.filter(o=>o.paid);
   const sum = a => a.reduce((t,o)=>t+o.total,0);
   $("#or-stats").innerHTML = [[os.length,"Orders"],[os.reduce((t,o)=>t+o.count,0),"Shirts ordered"],[money(sum(paid)),"e-Transfers received"],[money(sum(os)-sum(paid)),"Still to receive"]].map(([n,l])=>`<div class="stat"><b class="num">${n}</b><span>${l}</span></div>`).join("");
   $("#or-sum").innerHTML = `<table><thead><tr><th>Design</th>${SIZES.map(z=>`<th>${z}</th>`).join("")}<th>Total</th></tr></thead><tbody>${SHIRTS.map(s=>{ const c=z=>os.reduce((t,o)=>t+o.items.filter(i=>i.design===s.id&&i.size===z).reduce((a,i)=>a+i.qty,0),0); const tot=SIZES.reduce((a,z)=>a+c(z),0); return `<tr><td><b>${s.name}</b></td>${SIZES.map(z=>`<td class="num">${c(z)||"·"}</td>`).join("")}<td class="num"><b>${tot}</b></td></tr>`; }).join("")}</tbody></table>`;
-  $("#or-list").innerHTML = `<table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Delivery</th><th>Payment</th></tr></thead><tbody>${os.map(o=>`<tr><td class="num"><b>${esc(o.number)}</b><div class="muted" style="font-size:.78rem">${fmtDate(o.at)} ${fmtTime(o.at)}</div></td><td><b>${esc(o.name)}</b><div class="muted" style="font-size:.8rem">${esc(o.email)}${o.phone?" · "+esc(o.phone):""}</div></td><td style="font-size:.85rem">${o.items.map(i=>`${i.qty} × ${esc(i.designName)} ${i.size}`).join("<br>")}</td><td class="num"><b>${money(o.total)}</b></td><td style="font-size:.85rem">${o.fulfil==="ship"?"Ship: "+esc(o.address):"Pick up"}${o.notes?`<div class="muted">${esc(o.notes)}</div>`:""}</td><td>${o.paid?`<button class="pill ok" style="cursor:pointer" data-act="or-paid" data-id="${o.id}" data-p="0" title="Tap to undo">✓ Paid</button>`:`<button class="btn btn-navy btn-sm" data-act="or-paid" data-id="${o.id}" data-p="1">Mark paid</button>`}</td></tr>`).join("") || '<tr><td colspan="6"><div class="empty">No pre-orders yet.</div></td></tr>'}</tbody></table>`;
+  const oq=(CI.oq||"").toLowerCase(); const shown=os.filter(o=>!oq||(o.number+" "+o.name+" "+o.email).toLowerCase().includes(oq));
+  $("#or-list").innerHTML = `<table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Delivery</th><th>e-Transfer</th></tr></thead><tbody>${shown.map(o=>`<tr><td class="num"><b>${esc(o.number)}</b><div class="muted" style="font-size:.78rem">${fmtDate(o.at)} ${fmtTime(o.at)}</div></td><td><b>${esc(o.name)}</b><div class="muted" style="font-size:.8rem">${esc(o.email)}${o.phone?" · "+esc(o.phone):""}</div></td><td style="font-size:.85rem">${o.items.map(i=>`${i.qty} × ${esc(i.designName)} ${i.size}`).join("<br>")}</td><td class="num"><b>${money(o.total)}</b></td><td style="font-size:.85rem">${o.fulfil==="ship"?"Ship: "+esc(o.address):"Pick up"}${o.notes?`<div class="muted">${esc(o.notes)}</div>`:""}</td><td style="min-width:210px">${o.paid?`<div class="stack" style="gap:4px"><span class="pill ok" style="align-self:flex-start">✓ Paid</span><span class="num" style="font-size:.82rem">${o.etCode?"Code: <b>"+esc(o.etCode)+"</b>":"<span class=\"muted\">No code recorded</span>"}</span><button class="btn-ghost" style="color:#8A6720;align-self:flex-start;padding:2px 0" data-act="or-paid" data-id="${o.id}" data-p="0">Undo</button></div>`:`<div class="stack" style="gap:6px"><input id="et-${o.id}" placeholder="Confirmation code" aria-label="e-Transfer confirmation code for ${esc(o.number)}" autocomplete="off" style="padding:8px 10px"><button class="btn btn-navy btn-sm" data-act="or-paid" data-id="${o.id}" data-p="1">Save &amp; mark paid</button></div>`}</td></tr>`).join("") || `<tr><td colspan="6"><div class="empty">${os.length?"No orders match.":"No pre-orders yet."}</div></td></tr>`}</tbody></table>`;
 }
 async function loadOrders(){ try { CI.orders = (await api("/admin/orders", null, adminH())).orders; drawOrders(); } catch(e){ toast(e.message); } }
 CITAB.people = () => `<div class="box"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h3 style="margin:0">Newsletter list</h3><button class="btn btn-line btn-sm" data-act="copy-subs">Copy newsletter list (CSV)</button></div><div class="table-wrap" id="pp-subs"><div class="empty">Loading…</div></div></div>
@@ -681,7 +683,7 @@ const ROUTES = Object.keys(P);
 let timer, poll, current = null;
 function route(){ const h=(location.hash||"#"+(location.pathname.replace(/^\/+|\/+$/g,"")||"events")).slice(1); render(ROUTES.includes(h)?h:"events"); }
 function render(page){
-  current = page; clearInterval(timer); clearInterval(poll); cancelAnimationFrame(window._raf);
+  current = page; clearInterval(timer); clearInterval(poll); cancelAnimationFrame(window._raf); closeModal();
   $("#app").innerHTML = P[page]();
   $$(".navlinks a").forEach(a=>a.classList.toggle("on", a.dataset.nav===page));
   $("#mmenu").classList.remove("open");
@@ -744,8 +746,8 @@ document.addEventListener("click", async e=>{
     case "ci-news": { const r=CI.regs.find(x=>x.id===id); try { const d=await api("/admin/newsletter",{eventId:CI.ev,id},adminH()); Object.assign(r,d.reg); drawCheckin(); toast(`${r.name} added to the newsletter`); } catch(er){ toast(er.message); } break; }
     case "copy-list": { const rows=CI.regs.filter(r=>b.dataset.scope==="all"||r.newsletter); copyText(toCSV([["Name","Email","Phone","Code","Party","Checked in","Newsletter"],...rows.map(r=>[r.name,r.email,r.phone,r.code,1+Number(r.guests||0),r.checkedIn?"Yes":"No",r.newsletter?"Yes":"No"])]), `Copied ${rows.length} contacts`); break; }
     case "or-refresh": loadOrders(); break;
-    case "or-paid": { const o=CI.orders.find(x=>x.id===id); try { const d=await api("/admin/order-paid",{id,paid:b.dataset.p==="1"},adminH()); Object.assign(o,d.order); drawOrders(); toast(o.paid?`${o.number} marked paid`:"Payment mark removed"); } catch(er){ toast(er.message); } break; }
-    case "copy-orders": copyText(toCSV([["Order","Date","Name","Email","Phone","Items","Shirts","Total","Delivery","Address","Notes","Paid"],...CI.orders.map(o=>[o.number,o.at.slice(0,10),o.name,o.email,o.phone,o.items.map(i=>`${i.qty} x ${i.designName} ${i.size}`).join("; "),o.count,o.total,o.fulfil,o.address,o.notes,o.paid?"Yes":"No"])]), `Copied ${CI.orders.length} orders`); break;
+    case "or-paid": { const o=CI.orders.find(x=>x.id===id); try { const codeIn=$("#et-"+id); const etCode=codeIn?codeIn.value.trim():""; if(b.dataset.p==="1" && !etCode){ codeIn&&codeIn.focus(); toast("Enter the e-Transfer confirmation code first"); break; } const d=await api("/admin/order-paid",{id,paid:b.dataset.p==="1",etCode},adminH()); Object.assign(o,d.order); drawOrders(); toast(o.paid?`${o.number} marked paid · code ${o.etCode}`:"Payment mark removed"); } catch(er){ toast(er.message); } break; }
+    case "copy-orders": copyText(toCSV([["Order","Date","Name","Email","Phone","Items","Shirts","Total","Delivery","Address","Notes","Paid","e-Transfer code"],...CI.orders.map(o=>[o.number,o.at.slice(0,10),o.name,o.email,o.phone,o.items.map(i=>`${i.qty} x ${i.designName} ${i.size}`).join("; "),o.count,o.total,o.fulfil,o.address,o.notes,o.paid?"Yes":"No",o.etCode||""])]), `Copied ${CI.orders.length} orders`); break;
     case "copy-subs": { const s=CI.people?.subscribers||[]; copyText(toCSV([["Name","Email","Source","Date"],...s.map(x=>[x.name,x.email,x.source,x.at.slice(0,10)])]), `Copied ${s.length} contacts`); break; }
   }
 });
@@ -758,6 +760,7 @@ document.addEventListener("change", async e=>{
 document.addEventListener("input", e=>{
   if (e.target.id==="ci-q"){ CI.q=e.target.value; drawCheckin(); }
   if (e.target.dataset.q) orderTotals();
+  if (e.target.id==="or-q"){ CI.oq=e.target.value; drawOrders(); }
 });
 
 /* ---------- forms ---------- */

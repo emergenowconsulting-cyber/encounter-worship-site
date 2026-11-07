@@ -232,6 +232,7 @@ export default async (req) => {
         const o = await store.get(k);
         if (!o) return err("Order not found.", 404);
         o.paid = !!body.paid; o.paidAt = o.paid ? new Date().toISOString() : null;
+        o.etCode = o.paid ? clean(body.etCode, 60) : "";
         await store.setJSON(k, o);
         return json({ order: o });
       }
