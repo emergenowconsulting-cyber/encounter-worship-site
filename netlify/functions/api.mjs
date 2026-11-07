@@ -45,9 +45,9 @@ function env(name) {
   return process.env[name];
 }
 function isAdmin(req) {
-  const pin = env("ADMIN_PIN");
+  const pin = String(env("ADMIN_PIN") || env("Admin_Pin") || env("admin_pin") || env("ADMIN_Pin") || "").trim();
   if (!pin) return null;
-  const got = req.headers.get("x-admin-pin") || "";
+  const got = (req.headers.get("x-admin-pin") || "").trim();
   const a = Buffer.from(createHash("sha256").update(got).digest("hex"));
   const b = Buffer.from(createHash("sha256").update(pin).digest("hex"));
   return timingSafeEqual(a, b);
